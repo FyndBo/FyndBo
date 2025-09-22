@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FyndBo – Under konstruktion</title>
+  <title>FyndBo</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
       margin: 0;
@@ -19,26 +20,31 @@
       justify-content: center;
       align-items: center;
     }
+
     .logo {
       max-width: 250px;
       margin: 50px auto 30px;
     }
+
     h1 {
       font-family: 'Montserrat', sans-serif;
       font-size: 3em;
       color: #0f4c81;
       margin-bottom: 20px;
     }
+
     p {
       font-size: 1.2em;
       margin-bottom: 30px;
     }
+
     .countdown {
       font-family: 'Montserrat', sans-serif;
       font-size: 2em;
       color: #0f4c81;
       margin-bottom: 40px;
     }
+
     .info-button {
       display: inline-block;
       padding: 15px 30px;
@@ -49,38 +55,111 @@
       transition: background-color 0.3s;
       margin-bottom: 20px;
     }
+
     .info-button:hover {
       background-color: #073a5a;
     }
+
     .social-links {
       margin-top: 20px;
     }
+
     .social-links a {
-      margin: 0 10px;
-      text-decoration: none;
+      margin: 0 15px;
       color: #0f4c81;
-      font-size: 1.5em;
+      font-size: 2em;
       transition: color 0.3s;
     }
+
     .social-links a:hover {
       color: #073a5a;
     }
+
+    .additional-info {
+      max-width: 800px;
+      margin: 50px auto 30px;
+      text-align: left;
+      padding: 0 20px;
+    }
+
+    .additional-info h2 {
+      font-family: 'Montserrat', sans-serif;
+      color: #0f4c81;
+      margin-top: 40px;
+      font-size: 2em;
+    }
+
+    .additional-info p, .additional-info li {
+      font-size: 1.15em;
+      margin-bottom: 15px;
+    }
+
+    .feature-item::before {
+      content: "✔";
+      margin-right: 10px;
+      color: #0f4c81;
+    }
+
+    .quote {
+      font-style: italic;
+      background: rgba(15,76,129,0.1);
+      border-left: 5px solid #0f4c81;
+      padding: 15px 20px;
+      margin: 20px 0;
+    }
+
+    .img-section {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .img-section img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
   </style>
 </head>
 <body>
   <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo Logo" class="logo">
   <h1>Hej!</h1>
   <p>Denna hemsida är under konstruktion.<br>Planerad publicering: 2026-06-24</p>
+
   <div class="countdown" id="countdown"></div>
   <a href="Fyndbo.se-läs_mer.html" class="info-button">Läs mer om FyndBo</a>
 
   <div class="social-links">
-    <a href="https://www.instagram.com/fyndbo/" target="_blank">Instagram</a>
-    <a href="https://www.youtube.com/@FyndBo" target="_blank">YouTube</a>
+    <a href="https://www.instagram.com/fyndbo/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.youtube.com/@FyndBo" target="_blank"><i class="fab fa-youtube"></i></a>
+  </div>
+
+  <div class="additional-info">
+    <h2>Om FyndBo</h2>
+    <p>FyndBo är en modern bostadsportal som gör bostadsletande enklare och mer intuitivt. Vår vision är att hjälpa människor att hitta sitt drömhem på ett smartare sätt.</p>
+
+    <h2>Företagets historia</h2>
+    <p>Konceptet föddes ur en passion för teknik, design och innovation. Målet är att kombinera traditionella bostadsannonser med AI-rekommendationer.</p>
+
+    <ul>
+      <li class="feature-item">Smarta filter och kategorier</li>
+      <li class="feature-item">Detaljerad information om bostäder</li>
+      <li class="feature-item">AI-rekommendationer</li>
+      <li class="feature-item">Interaktiv design</li>
+    </ul>
+
+    <div class="quote">"Vi vill skapa en plattform där bostadsletande blir roligt, smart och enkelt – och där alla kan hitta sitt drömhem."</div>
+
+    <h2>Framtida funktioner</h2>
+    <ul>
+      <li class="feature-item">Interaktiva kartor</li>
+      <li class="feature-item">Notifieringar för nya objekt</li>
+      <li class="feature-item">Integration med sociala medier</li>
+      <li class="feature-item">Detaljerade analyser av bostadsmarknaden</li>
+    </ul>
   </div>
 
   <script>
-    // Countdown
     const countDate = new Date("2026-06-24T00:00:00").getTime();
     const countdownElement = document.getElementById("countdown");
 
