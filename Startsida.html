@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body { font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+    /* Hero Section */
     .hero {
       position: relative;
       height: 100vh;
@@ -22,7 +23,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1950&q=80');
+      background-image: url('https://images.unsplash.com/photo-1486308510493-aa64833634ef?auto=format&fit=crop&w=1950&q=80');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -57,8 +58,8 @@
 
 <body class="bg-white text-gray-900">
 
-  <!-- NAV -->
-  <header id="nav" class="fixed top-0 inset-x-0 z-50 transition-colors">
+  <!-- HEADER (stannar högst upp, ej sticky) -->
+  <header class="w-full bg-transparent absolute top-0 left-0 z-50">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo" class="h-36 md:h-44 drop-shadow-2xl">
