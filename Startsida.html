@@ -2,156 +2,263 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FyndBo | Ditt drömhem börjar här</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FyndBo | Hitta, sälj och upptäck hem</title>
   <link rel="icon" href="images/FyndBo-blue-removebg-preview.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    body { font-family:'Poppins',sans-serif; }
-    .hero::before {
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(to bottom right,rgba(10,37,64,0.85),rgba(0,0,0,0.5));
+    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"; }
+    .hero-overlay::before{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(180deg,rgba(8,29,58,.65) 0%,rgba(8,29,58,.45) 40%,rgba(8,29,58,.35) 100%);
       z-index:1;
     }
-    .animate-fadeUp {
-      animation: fadeUp 1s ease-out forwards;
-      opacity:0;
-    }
-    @keyframes fadeUp {
-      from {transform:translateY(30px);opacity:0;}
-      to {transform:translateY(0);opacity:1;}
-    }
+    .glass{ backdrop-filter: blur(10px); background:rgba(255,255,255,.13); }
+    .shadow-soft{ box-shadow:0 20px 45px rgba(0,0,0,.25); }
+    .reveal{ opacity:0; transform:translateY(22px); transition:all .8s cubic-bezier(.2,.7,.2,1); }
+    .reveal.show{ opacity:1; transform:translateY(0); }
   </style>
 </head>
-<body class="bg-white text-gray-800 overflow-x-hidden">
+<body class="bg-white text-gray-900 overflow-x-hidden">
 
-  <!-- Navbar -->
-  <header class="fixed top-0 w-full z-50 bg-transparent backdrop-blur-sm text-white">
-    <div class="max-w-7xl mx-auto flex justify-between items-center py-4 px-6">
-      <div class="flex items-center space-x-3">
-        <img src="images/FyndBo-blue-removebg-preview.png" class="h-14 md:h-16 drop-shadow-xl">
-        <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">FyndBo</h1>
+  <!-- NAV -->
+  <header id="nav" class="fixed top-0 inset-x-0 z-50 transition-colors">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo" class="h-14 md:h-16 drop-shadow-xl">
+        <span class="text-2xl md:text-3xl font-extrabold tracking-tight text-white">FyndBo</span>
       </div>
-      <nav class="hidden md:flex space-x-6 text-white/90 font-medium">
+      <nav class="hidden md:flex items-center gap-8 text-white/90 font-medium">
         <a href="#" class="hover:text-white">Hem</a>
         <a href="#" class="hover:text-white">Bostäder</a>
         <a href="#" class="hover:text-white">Om oss</a>
         <a href="#" class="hover:text-white">Kontakt</a>
       </nav>
-      <div class="space-x-3">
-        <a href="#" class="px-5 py-2 border border-white/70 rounded-full text-white/90 hover:bg-white hover:text-blue-800 transition">Logga in</a>
-        <a href="#" class="px-5 py-2 bg-white text-blue-800 rounded-full font-semibold hover:bg-blue-100 transition">Registrera</a>
+      <div class="flex items-center gap-3">
+        <a href="#" class="px-5 py-2 rounded-full border border-white/70 text-white/90 hover:bg-white hover:text-blue-800 transition">Logga in</a>
+        <a href="#" class="px-5 py-2 rounded-full bg-white text-blue-800 font-semibold hover:bg-blue-100 transition">Registrera</a>
       </div>
     </div>
   </header>
 
   <!-- HERO -->
-  <section class="hero relative h-[90vh] flex flex-col justify-center items-center text-center overflow-hidden">
-    <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1950&q=80"
-         class="absolute inset-0 w-full h-full object-cover" alt="city skyline">
-    <div class="relative z-10 max-w-3xl px-4 text-white animate-fadeUp">
-      <h2 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight drop-shadow-2xl">Hitta ditt nästa drömhem</h2>
-      <p class="text-lg md:text-xl text-gray-100 mb-8">Upplev framtidens bostadsportal – snabb, säker och stilren.</p>
-      <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a href="#" class="px-8 py-3 rounded-full bg-white text-blue-800 font-semibold hover:bg-gray-100 transition">Sök bostad</a>
-        <a href="#" class="px-8 py-3 rounded-full bg-gradient-to-r from-blue-700 to-blue-500 text-white font-semibold hover:opacity-90 transition">Lägg upp annons</a>
+  <section class="relative h-[92vh] flex items-center justify-center hero-overlay">
+    <img
+      src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=2000&q=80"
+      alt="Stilrent villaområde"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#071d3a]/30"></div>
+    <div class="relative z-10 text-center max-w-3xl px-6">
+      <h1 class="text-4xl md:text-6xl font-extrabold text-white drop-shadow-2xl leading-tight">Hitta ditt nästa drömhem</h1>
+      <p class="mt-4 text-lg md:text-xl text-blue-100">Sveriges moderna bostadsportal – snabb, säker och designad för att imponera.</p>
+
+      <!-- Glass search -->
+      <div class="mt-8 glass rounded-2xl shadow-soft p-3 md:p-4 inline-block">
+        <form class="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4">
+          <input type="text" placeholder="Ort / område" class="px-4 py-3 rounded-xl bg-white/90 text-gray-900 focus:outline-none">
+          <input type="text" placeholder="Pris (max)" class="px-4 py-3 rounded-xl bg-white/90 text-gray-900 focus:outline-none">
+          <select class="px-4 py-3 rounded-xl bg-white/90 text-gray-900 focus:outline-none">
+            <option>Boendetyp</option>
+            <option>Villa</option><option>Radhus</option><option>Bostadsrätt</option>
+          </select>
+          <button class="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold hover:opacity-90 transition">Sök bostad</button>
+        </form>
+      </div>
+
+      <div class="mt-6 flex justify-center gap-4 text-white/80 text-sm">
+        <span><i class="fa-solid fa-shield-halved mr-2"></i>Trygga affärer</span>
+        <span><i class="fa-solid fa-bolt mr-2"></i>Snabb publicering</span>
+        <span><i class="fa-solid fa-wand-magic-sparkles mr-2"></i>Smarta filter</span>
       </div>
     </div>
   </section>
 
-  <!-- Statistik -->
-  <section class="py-20 bg-white text-center">
-    <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-10">Siffror som talar för sig själva</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 max-w-5xl mx-auto">
-      <div>
-        <p class="text-5xl font-extrabold text-blue-700">14 532</p>
-        <p class="text-gray-600">Aktiva annonser</p>
+  <!-- STATISTIK (räknar upp) -->
+  <section class="py-14 md:py-18 bg-white text-center">
+    <h2 class="reveal text-3xl md:text-4xl font-extrabold text-blue-900 mb-8">Sveriges bostadsmarknad just nu</h2>
+    <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+      <div><p class="counter text-5xl font-extrabold text-blue-700" data-target="14532">0</p><p class="text-gray-600">Aktiva annonser</p></div>
+      <div><p class="text-5xl font-extrabold text-blue-700"><span class="counter" data-target="4100">0</span> tkr</p><p class="text-gray-600">Snittpris villa</p></div>
+      <div><p class="counter text-5xl font-extrabold text-blue-700" data-target="28">0</p><p class="text-gray-600">Nya bostäder / dag</p></div>
+      <div><p class="counter text-5xl font-extrabold text-blue-700" data-target="98">0</p><p class="text-gray-600">Nöjda användare</p></div>
+    </div>
+  </section>
+
+  <!-- SENAST TILLAGDA -->
+  <section class="py-16 bg-blue-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="reveal flex items-end justify-between mb-8">
+        <h3 class="text-2xl md:text-3xl font-extrabold text-blue-900">Senast tillagda bostäder</h3>
+        <a href="#" class="text-blue-700 font-semibold hover:underline">Visa alla</a>
       </div>
-      <div>
-        <p class="text-5xl font-extrabold text-blue-700">4.1 Mkr</p>
-        <p class="text-gray-600">Snittpris villa</p>
-      </div>
-      <div>
-        <p class="text-5xl font-extrabold text-blue-700">28</p>
-        <p class="text-gray-600">Nya bostäder / dag</p>
-      </div>
-      <div>
-        <p class="text-5xl font-extrabold text-blue-700">98%</p>
-        <p class="text-gray-600">Nöjda användare</p>
+
+      <div class="grid gap-6 md:grid-cols-3 reveal">
+        <!-- Card 1 -->
+        <article class="bg-white rounded-2xl overflow-hidden shadow hover:shadow-xl transition">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80" alt="Modern villa" class="w-full h-56 object-cover">
+            <span class="absolute top-3 left-3 bg-white/90 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">Ny</span>
+          </div>
+          <div class="p-5">
+            <h4 class="text-xl font-bold text-blue-900">Villavägen 12</h4>
+            <p class="text-gray-600 mb-2">4 rum • 120 m² • Nacka</p>
+            <p class="font-semibold text-blue-700 mb-3">5,5 Mkr</p>
+            <a href="#" class="inline-flex items-center text-blue-700 font-semibold hover:underline">Visa mer <i class="fa-solid fa-arrow-right ml-2"></i></a>
+          </div>
+        </article>
+        <!-- Card 2 -->
+        <article class="bg-white rounded-2xl overflow-hidden shadow hover:shadow-xl transition">
+          <img src="https://images.unsplash.com/photo-1600585154154-1e206b06c21e?auto=format&fit=crop&w=1200&q=80" alt="Radhus" class="w-full h-56 object-cover">
+          <div class="p-5">
+            <h4 class="text-xl font-bold text-blue-900">Strandvägen 45</h4>
+            <p class="text-gray-600 mb-2">3 rum • 85 m² • Malmö</p>
+            <p class="font-semibold text-blue-700 mb-3">3,2 Mkr</p>
+            <a href="#" class="inline-flex items-center text-blue-700 font-semibold hover:underline">Visa mer <i class="fa-solid fa-arrow-right ml-2"></i></a>
+          </div>
+        </article>
+        <!-- Card 3 -->
+        <article class="bg-white rounded-2xl overflow-hidden shadow hover:shadow-xl transition">
+          <img src="https://images.unsplash.com/photo-1600585154510-76fb20a32601?auto=format&fit=crop&w=1200&q=80" alt="Bostadsrätt" class="w-full h-56 object-cover">
+          <div class="p-5">
+            <h4 class="text-xl font-bold text-blue-900">Skogsvägen 7</h4>
+            <p class="text-gray-600 mb-2">5 rum • 150 m² • Uppsala</p>
+            <p class="font-semibold text-blue-700 mb-3">6,8 Mkr</p>
+            <a href="#" class="inline-flex items-center text-blue-700 font-semibold hover:underline">Visa mer <i class="fa-solid fa-arrow-right ml-2"></i></a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- Fördelar -->
-  <section class="py-20 bg-gradient-to-b from-blue-50 to-white">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold text-blue-900 mb-16">Varför FyndBo?</h2>
-      <div class="grid md:grid-cols-3 gap-10">
-        <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition">
-          <i class="fa-solid fa-shield-halved text-4xl text-blue-700 mb-4"></i>
-          <h3 class="font-bold text-xl text-blue-900 mb-2">Trygghet</h3>
-          <p class="text-gray-700">Verifierade användare och säkra betalningar – för en trygg bostadsaffär.</p>
+  <!-- FÖRDELAR / SÅ FUNKAR DET -->
+  <section class="py-18 bg-white">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div class="reveal">
+        <h3 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-4">Varför välja FyndBo?</h3>
+        <p class="text-gray-700 mb-6">Vi kombinerar smart teknik, vass design och tydlig process – för att göra bostadsresan enkel och trygg.</p>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3"><i class="fa-solid fa-check text-blue-600 mt-1"></i> Verifierade säljare & säkra processer</li>
+          <li class="flex items-start gap-3"><i class="fa-solid fa-check text-blue-600 mt-1"></i> AI-baserade rekommendationer & smarta filter</li>
+          <li class="flex items-start gap-3"><i class="fa-solid fa-check text-blue-600 mt-1"></i> Snabb annons-publicering och enkel administration</li>
+        </ul>
+        <div class="mt-6 flex gap-3">
+          <a href="#" class="px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">Skapa konto</a>
+          <a href="#" class="px-6 py-3 rounded-xl border border-blue-600 text-blue-700 font-semibold hover:bg-blue-50 transition">Kontakta oss</a>
         </div>
-        <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition">
-          <i class="fa-solid fa-magnifying-glass text-4xl text-blue-700 mb-4"></i>
-          <h3 class="font-bold text-xl text-blue-900 mb-2">Smart sökning</h3>
-          <p class="text-gray-700">AI-baserad filtrering hjälper dig hitta exakt det du söker.</p>
-        </div>
-        <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition">
-          <i class="fa-solid fa-bolt text-4xl text-blue-700 mb-4"></i>
-          <h3 class="font-bold text-xl text-blue-900 mb-2">Blixtsnabbt</h3>
-          <p class="text-gray-700">Publicera annonser och få kontakt med köpare på bara några minuter.</p>
-        </div>
+      </div>
+      <div class="reveal grid grid-cols-2 gap-4">
+        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=900&q=70" alt="Interiör" class="rounded-2xl w-full h-56 object-cover">
+        <img src="https://images.unsplash.com/photo-1600585154154-1e206b06c21e?auto=format&fit=crop&w=900&q=70" alt="Radhus" class="rounded-2xl w-full h-56 object-cover">
+        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=70" alt="Kök" class="rounded-2xl w-full h-56 object-cover">
+        <img src="https://images.unsplash.com/photo-1600585154207-61e6f93b33de?auto=format&fit=crop&w=900&q=70" alt="Modern villa" class="rounded-2xl w-full h-56 object-cover">
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="py-24 bg-gradient-to-r from-blue-800 to-blue-600 text-white text-center relative overflow-hidden">
-    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1920&q=80')] opacity-20 bg-cover"></div>
-    <div class="relative z-10 max-w-3xl mx-auto px-4">
-      <h2 class="text-4xl font-bold mb-4">Redo att hitta ditt drömhem?</h2>
-      <p class="text-lg text-blue-100 mb-8">Börja din resa idag – snabbt, enkelt och inspirerande.</p>
-      <a href="#" class="bg-white text-blue-800 px-8 py-3 rounded-full font-semibold hover:bg-blue-100 transition">Kom igång</a>
+  <!-- SOCIAL PROOF -->
+  <section class="py-14 bg-blue-50">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h3 class="reveal text-2xl md:text-3xl font-extrabold text-blue-900 mb-8">Uppmärksammad i press & av partners</h3>
+      <div class="reveal grid grid-cols-2 md:grid-cols-5 gap-6 place-items-center opacity-80">
+        <img src="https://dummyimage.com/120x34/84a9c9/ffffff&text=Tech24" class="h-6" alt="logo">
+        <img src="https://dummyimage.com/120x34/84a9c9/ffffff&text=NordicBiz" class="h-6" alt="logo">
+        <img src="https://dummyimage.com/120x34/84a9c9/ffffff&text=Home+Mag" class="h-6" alt="logo">
+        <img src="https://dummyimage.com/120x34/84a9c9/ffffff&text=Fastighet" class="h-6" alt="logo">
+        <img src="https://dummyimage.com/120x34/84a9c9/ffffff&text=MarketIQ" class="h-6" alt="logo">
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-blue-950 text-white py-16">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-8 px-6">
+  <!-- STOR CTA -->
+  <section class="relative py-24 text-center text-white overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1505691723518-36a5ac3b2d95?auto=format&fit=crop&w=1920&q=80" alt="Hus kväll" class="absolute inset-0 w-full h-full object-cover">
+    <div class="absolute inset-0 bg-blue-950/70"></div>
+    <div class="relative z-10 max-w-3xl mx-auto px-6">
+      <h3 class="text-3xl md:text-4xl font-extrabold mb-4">Redo att hitta eller sälja?</h3>
+      <p class="text-blue-100 mb-8">Vi ger dig verktygen, räckvidden och tryggheten för att lyckas.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#" class="px-7 py-3 rounded-full bg-white text-blue-800 font-semibold hover:bg-blue-100 transition">Börja söka</a>
+        <a href="#" class="px-7 py-3 rounded-full border border-white font-semibold hover:bg-white/10 transition">Lägg upp annons</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-blue-950 text-white">
+    <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-4 gap-10">
       <div>
-        <img src="images/FyndBo-blue-removebg-preview.png" class="h-14 mb-3">
-        <p class="text-blue-300">Din moderna bostadsportal för en enklare och smartare framtid.</p>
+        <div class="flex items-center gap-3 mb-3">
+          <img src="images/FyndBo-blue-removebg-preview.png" class="h-14" alt="FyndBo">
+          <span class="text-2xl font-extrabold">FyndBo</span>
+        </div>
+        <p class="text-blue-200">Din plattform för att hitta och sälja bostäder – med fokus på design, enkelhet och trygghet.</p>
+        <div class="flex gap-4 text-xl mt-4">
+          <a href="#" class="hover:text-blue-300"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="hover:text-blue-300"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="hover:text-blue-300"><i class="fab fa-facebook"></i></a>
+        </div>
       </div>
       <div>
-        <h3 class="font-bold text-lg mb-3">Snabblänkar</h3>
-        <ul class="space-y-2 text-blue-300">
+        <h4 class="font-bold text-lg mb-3">Länkar</h4>
+        <ul class="space-y-2 text-blue-200">
           <li><a href="#" class="hover:text-white">Hem</a></li>
           <li><a href="#" class="hover:text-white">Sök bostad</a></li>
           <li><a href="#" class="hover:text-white">Om oss</a></li>
+          <li><a href="#" class="hover:text-white">Kontakt</a></li>
           <li><a href="#" class="hover:text-white">Villkor</a></li>
         </ul>
       </div>
       <div>
-        <h3 class="font-bold text-lg mb-3">Kontakt</h3>
-        <p class="text-blue-300">info@fyndbo.se<br>08–123 45 67<br>Stockholm</p>
+        <h4 class="font-bold text-lg mb-3">Kontakt</h4>
+        <p class="text-blue-200">info@fyndbo.se<br>08–123 45 67<br>Stockholm, Sverige</p>
       </div>
       <div>
-        <h3 class="font-bold text-lg mb-3">Nyhetsbrev</h3>
-        <p class="text-blue-300 mb-3">Få uppdateringar direkt i din inkorg.</p>
+        <h4 class="font-bold text-lg mb-3">Nyhetsbrev</h4>
+        <p class="text-blue-200 mb-2">Få nyheter och bostäder direkt i inkorgen.</p>
         <div class="flex">
           <input type="email" placeholder="Din e-post" class="px-3 py-2 rounded-l bg-white text-gray-800 w-full focus:outline-none">
-          <button class="bg-blue-700 px-4 py-2 rounded-r hover:bg-blue-600">OK</button>
+          <button class="bg-blue-700 px-4 py-2 rounded-r hover:bg-blue-600">Prenumerera</button>
         </div>
       </div>
     </div>
-    <div class="border-t border-blue-800 mt-10 pt-6 text-center text-sm text-blue-300">
-      © 2025 FyndBo. Alla rättigheter förbehållna. <span class="ml-2 opacity-70">Designad av FyndBo Studio</span>
+    <div class="border-t border-blue-800 py-6 text-center text-sm text-blue-300">
+      © 2025 FyndBo. Alla rättigheter förbehållna. <span class="opacity-70">Designad för att imponera.</span>
     </div>
   </footer>
 
+  <!-- INTERAKTION/ANIMATIONER -->
+  <script>
+    // Sticky nav färg vid scroll
+    const nav = document.getElementById('nav');
+    const setNavBg = () => {
+      const y = window.scrollY || document.documentElement.scrollTop;
+      nav.style.background = y > 30 ? 'rgba(7,29,58,.75)' : 'linear-gradient(180deg,rgba(7,29,58,.35),rgba(7,29,58,0))';
+      nav.style.backdropFilter = 'blur(8px)';
+    };
+    setNavBg(); window.addEventListener('scroll', setNavBg);
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }});
+    },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // Counters
+    const counters = document.querySelectorAll('.counter');
+    const co = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        const el = entry.target; const target = +el.dataset.target; let n = 0;
+        const step = Math.max(1, Math.round(target/60));
+        const tick = () => { n += step; if(n >= target){ el.textContent = target.toLocaleString('sv-SE'); }
+          else { el.textContent = n.toLocaleString('sv-SE'); requestAnimationFrame(tick); } };
+        requestAnimationFrame(tick);
+        co.unobserve(el);
+      });
+    },{threshold:.6});
+    counters.forEach(el=>co.observe(el));
+  </script>
 </body>
 </html>
