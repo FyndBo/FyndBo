@@ -7,9 +7,11 @@
   <link rel="icon" href="images/FyndBo-blue-removebg-preview.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     body { font-family: 'Poppins', sans-serif; overflow-x: hidden; }
-    /* Hero Section */
+
+    /* HERO */
     .hero {
       position: relative;
       height: 100vh;
@@ -19,23 +21,27 @@
       color: white;
       overflow: hidden;
     }
+
     .hero::before {
       content: "";
       position: absolute;
       inset: 0;
-      background-image: url('https://images.unsplash.com/photo-1486308510493-aa64833634ef?auto=format&fit=crop&w=1950&q=80');
+      background-image: url('https://images.unsplash.com/photo-1509475826633-fed577a2c71b?auto=format&fit=crop&w=1950&q=80');
+      /* ↑ Överbild över Stockholm med vatten & ljus */
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
       transform: scale(1.05);
-      filter: brightness(0.65);
+      filter: brightness(0.68);
       z-index: 0;
       animation: zoomIn 25s ease-in-out infinite alternate;
     }
+
     @keyframes zoomIn {
       from { transform: scale(1.05); }
       to { transform: scale(1.15); }
     }
+
     .hero::after {
       content: "";
       position: absolute;
@@ -43,23 +49,44 @@
       background: linear-gradient(to bottom, rgba(0, 20, 50, 0.3), rgba(0, 20, 50, 0.85));
       z-index: 1;
     }
+
     .hero-content {
       position: relative;
       z-index: 2;
       text-align: center;
       animation: fadeIn 1.2s ease-out;
     }
+
     @keyframes fadeIn {
       from {opacity:0; transform:translateY(25px);}
       to {opacity:1; transform:translateY(0);}
+    }
+
+    /* HEADER ANIMATION */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 50;
+      transition: top 0.4s ease, background-color 0.4s ease;
+    }
+
+    header.hidden-header {
+      top: -120px; /* gömmer headern när man scrollar ner */
+    }
+
+    header.visible-header {
+      top: 0; /* visar när man scrollar upp */
+      background-color: rgba(0, 20, 50, 0.7);
+      backdrop-filter: blur(8px);
     }
   </style>
 </head>
 
 <body class="bg-white text-gray-900">
 
-  <!-- HEADER (stannar högst upp, ej sticky) -->
-  <header class="w-full bg-transparent absolute top-0 left-0 z-50">
+  <!-- HEADER -->
+  <header id="mainHeader" class="visible-header">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo" class="h-36 md:h-44 drop-shadow-2xl">
@@ -194,6 +221,31 @@
       © 2025 FyndBo. Alla rättigheter förbehållna.
     </div>
   </footer>
+
+  <!-- HEADER BEHAVIOUR SCRIPT -->
+  <script>
+    let lastScroll = 0;
+    const header = document.getElementById('mainHeader');
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll <= 0) {
+        header.classList.remove('hidden-header');
+        header.classList.add('visible-header');
+        return;
+      }
+
+      if (currentScroll > lastScroll && !header.classList.contains('hidden-header')) {
+        header.classList.remove('visible-header');
+        header.classList.add('hidden-header');
+      } else if (currentScroll < lastScroll && header.classList.contains('hidden-header')) {
+        header.classList.remove('hidden-header');
+        header.classList.add('visible-header');
+      }
+      lastScroll = currentScroll;
+    });
+  </script>
 
 </body>
 </html>
