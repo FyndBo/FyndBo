@@ -21,6 +21,27 @@
       align-items: center;
     }
 
+    /* Diskret länk till startsidan */
+    .to-home {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 0.95em;
+      padding: 8px 18px;
+      border: 1px solid #0f4c81;
+      border-radius: 20px;
+      color: #0f4c81;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
+
+    .to-home:hover {
+      background: #0f4c81;
+      color: #fff;
+    }
+
     .logo {
       max-width: 250px;
       margin: 50px auto 30px;
@@ -122,6 +143,10 @@
   </style>
 </head>
 <body>
+
+  <!-- Knapp till startsidan -->
+  <a href="Startsida.html" class="to-home">Gå till startsidan</a>
+
   <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo Logo" class="logo">
   <h1>Hej!</h1>
   <p>Denna hemsida är under konstruktion.<br>Planerad publicering: 2026-06-24</p>
