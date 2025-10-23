@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FyndBo</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9fafb;
+    }
+  </style>
+</head>
+
+<body class="text-gray-800">
+  <custom-navbar></custom-navbar>
+
+  <!-- Hero Section -->
+  <div id="hero" class="relative h-[80vh] flex items-center justify-center bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80');">
+    <div class="absolute inset-0 bg-gradient-to-t from-white/90 to-white/60"></div>
+    <div class="relative z-10 text-center px-4">
+      <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Hitta ditt nästa drömboende</h1>
+      <p class="text-lg md:text-xl text-gray-700 mb-6 max-w-2xl mx-auto">Snabbt, enkelt och tryggt – din bostadsplattform för hus och hem.</p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full text-base font-medium shadow-md transition duration-300">Sök bostad</a>
+        <a href="#" class="bg-white hover:bg-gray-100 text-blue-600 px-6 py-3 rounded-full text-base font-medium shadow-md transition duration-300">Sök mäklare</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why Choose Us -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-center text-blue-900 mb-10">Varför välja FyndBo?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-blue-50 p-6 rounded-xl text-center">
+          <div class="bg-blue-100 w-14 h-14 mx-auto rounded-full flex items-center justify-center mb-3">
+            <i data-feather="shield" class="text-blue-600 w-6 h-6"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-blue-900 mb-2">Trygga affärer</h3>
+          <p class="text-sm text-blue-800">Verifierade säljare och säkra transaktioner för din trygghet.</p>
+        </div>
+        <div class="bg-blue-50 p-6 rounded-xl text-center">
+          <div class="bg-blue-100 w-14 h-14 mx-auto rounded-full flex items-center justify-center mb-3">
+            <i data-feather="search" class="text-blue-600 w-6 h-6"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-blue-900 mb-2">Smart sökning</h3>
+          <p class="text-sm text-blue-800">Avancerade filter hjälper dig hitta exakt det du letar efter.</p>
+        </div>
+        <div class="bg-blue-50 p-6 rounded-xl text-center">
+          <div class="bg-blue-100 w-14 h-14 mx-auto rounded-full flex items-center justify-center mb-3">
+            <i data-feather="dollar-sign" class="text-blue-600 w-6 h-6"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-blue-900 mb-2">Prisvärd service</h3>
+          <p class="text-sm text-blue-800">Kvalitetsannonsering till konkurrenskraftiga priser.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Properties -->
+  <section class="py-12 bg-blue-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-center text-blue-900 mb-10">Utvalda bostäder</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
+          <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80" class="w-full h-44 object-cover" alt="Property">
+          <div class="p-4">
+            <h3 class="text-lg font-bold text-blue-900 mb-1">Villaväg 12</h3>
+            <p class="text-sm text-blue-800 mb-3">4 rum | 120m² | 5,5 Mkr</p>
+            <a href="#" class="text-blue-600 font-medium flex items-center text-sm">Visa mer <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i></a>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
+          <img src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c?auto=format&fit=crop&w=800&q=80" class="w-full h-44 object-cover" alt="Property">
+          <div class="p-4">
+            <h3 class="text-lg font-bold text-blue-900 mb-1">Strandvägen 45</h3>
+            <p class="text-sm text-blue-800 mb-3">3 rum | 85m² | 3,2 Mkr</p>
+            <a href="#" class="text-blue-600 font-medium flex items-center text-sm">Visa mer <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i></a>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
+          <img src="https://images.unsplash.com/photo-1600585154207-61e6f93b33de?auto=format&fit=crop&w=800&q=80" class="w-full h-44 object-cover" alt="Property">
+          <div class="p-4">
+            <h3 class="text-lg font-bold text-blue-900 mb-1">Skogsvägen 7</h3>
+            <p class="text-sm text-blue-800 mb-3">5 rum | 150m² | 6,8 Mkr</p>
+            <a href="#" class="text-blue-600 font-medium flex items-center text-sm">Visa mer <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-8">
+        <a href="#" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full text-base font-medium shadow-md transition">Visa fler bostäder</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-14 bg-blue-600 text-white text-center">
+    <h2 class="text-2xl md:text-3xl font-bold mb-4">Redo att hitta ditt drömhem?</h2>
+    <p class="text-lg mb-6 max-w-xl mx-auto">Börja din sökning idag eller lägg upp din egen annons.</p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="#" class="bg-white hover:bg-blue-50 text-blue-600 px-6 py-2 rounded-full text-base font-medium shadow-md transition">Registrera dig</a>
+      <a href="#" class="bg-transparent hover:bg-blue-700 border-2 border-white text-white px-6 py-2 rounded-full text-base font-medium shadow-md transition">Logga in</a>
+    </div>
+  </section>
+
+  <custom-footer></custom-footer>
+
+  <script src="components/navbar.js"></script>
+  <script src="components/footer.js"></script>
+  <script>
+    feather.replace();
+  </script>
+</body>
+</html>
