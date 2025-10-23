@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FyndBo | Hitta ditt nästa drömhem</title>
+  <title>FyndBo | Framtidens bostadsportal</title>
   <link rel="icon" href="images/FyndBo-blue-removebg-preview.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -12,11 +12,11 @@
     .hero {
       position: relative;
       height: 100vh;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
+      overflow: hidden;
     }
     .hero video {
       position: absolute;
@@ -26,27 +26,29 @@
       filter: brightness(0.7);
       z-index: 0;
       transform: scale(1.05);
-      animation: zoomIn 25s ease-in-out infinite alternate;
+      animation: zoomIn 30s ease-in-out infinite alternate;
     }
     @keyframes zoomIn {
       from { transform: scale(1.05); }
-      to { transform: scale(1.15); }
+      to { transform: scale(1.2); }
     }
     .hero::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(0, 15, 40, 0.5), rgba(0, 25, 60, 0.85));
+      background: linear-gradient(to bottom, rgba(0, 15, 40, 0.5), rgba(0, 20, 50, 0.85));
       z-index: 1;
     }
-    .hero-content { position: relative; z-index: 2; text-align: center; animation: fadeIn 1.2s ease-out; }
-    .glass {
-      backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.15);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      border: 1px solid rgba(255,255,255,0.25);
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      animation: fadeIn 1.2s ease-out;
     }
-    @keyframes fadeIn { from {opacity:0; transform:translateY(25px);} to {opacity:1; transform:translateY(0);} }
+    @keyframes fadeIn {
+      from {opacity:0; transform:translateY(25px);}
+      to {opacity:1; transform:translateY(0);}
+    }
   </style>
 </head>
 
@@ -55,46 +57,43 @@
   <!-- NAV -->
   <header id="nav" class="fixed top-0 inset-x-0 z-50 transition-colors">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo" class="h-32 md:h-40 drop-shadow-2xl">
+      </div>
       <nav class="hidden md:flex items-center gap-8 text-white/90 font-medium">
         <a href="#" class="hover:text-white">Hem</a>
-        <a href="#" class="hover:text-white">Bostäder</a>
         <a href="#" class="hover:text-white">Om oss</a>
+        <a href="#" class="hover:text-white">Tjänster</a>
         <a href="#" class="hover:text-white">Kontakt</a>
       </nav>
-      <div class="flex items-center gap-3">
-        <a href="#" class="px-5 py-2 rounded-full border border-white/70 text-white/90 hover:bg-white hover:text-blue-800 transition">Logga in</a>
-        <a href="#" class="px-5 py-2 rounded-full bg-white text-blue-800 font-semibold hover:bg-blue-100 transition">Registrera</a>
-      </div>
-      <div>
-        <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo" class="h-28 md:h-32 drop-shadow-2xl">
-      </div>
+      <a href="#" class="px-5 py-2 rounded-full bg-white text-blue-800 font-semibold hover:bg-blue-100 transition">Logga in</a>
     </div>
   </header>
 
-  <!-- HERO -->
+  <!-- HERO SECTION -->
   <section class="hero">
     <video autoplay muted loop playsinline>
       <source src="https://assets.mixkit.co/videos/preview/mixkit-houses-in-a-residential-neighborhood-43908-large.mp4" type="video/mp4">
     </video>
     <div class="hero-content px-6 max-w-3xl">
-      <h1 class="text-5xl md:text-7xl font-extrabold drop-shadow-2xl leading-tight">Hitta ditt nästa drömhem</h1>
-      <p class="mt-4 text-lg md:text-xl text-blue-100">Upplev framtidens bostadsportal – exklusiv, trygg och byggd för dig.</p>
-      <div class="mt-10 glass rounded-2xl shadow-lg p-4 md:p-5 inline-block w-full max-w-2xl">
-        <form class="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4">
-          <input type="text" placeholder="Ort / område" class="px-4 py-3 rounded-xl bg-white/90 text-gray-900 focus:outline-none">
-          <input type="text" placeholder="Pris (max)" class="px-4 py-3 rounded-xl bg-white/90 text-gray-900 focus:outline-none">
-          <select class="px-4 py-3 rounded-xl bg-white/90 text-gray-900 focus:outline-none">
-            <option>Boendetyp</option><option>Villa</option><option>Radhus</option><option>Bostadsrätt</option>
-          </select>
-          <button class="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-400 text-white font-semibold hover:opacity-90 transition">Sök bostad</button>
-        </form>
+      <h1 class="text-5xl md:text-7xl font-extrabold drop-shadow-2xl leading-tight mb-6">
+        Välkommen till <span class="text-blue-300">FyndBo</span>
+      </h1>
+      <p class="mt-2 text-lg md:text-xl text-blue-100 max-w-2xl mx-auto">
+        En modern bostadsportal som förenar teknik, design och trygghet.  
+        FyndBo gör bostadsmarknaden enklare, smartare och mer personlig.
+      </p>
+      <div class="mt-10">
+        <a href="OmFyndBo.html" class="px-7 py-3 rounded-full bg-white text-blue-800 font-semibold hover:bg-blue-100 transition">
+          Läs mer om oss
+        </a>
       </div>
     </div>
   </section>
 
   <!-- STATISTIK -->
   <section class="py-16 bg-gradient-to-b from-white to-blue-50 text-center">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-8">Sveriges bostadsmarknad just nu</h2>
+    <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-8">Våra resultat i siffror</h2>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
       <div><p class="text-5xl font-extrabold text-blue-700">14 532</p><p class="text-gray-600">Aktiva annonser</p></div>
       <div><p class="text-5xl font-extrabold text-blue-700">4.1 Mkr</p><p class="text-gray-600">Snittpris villa</p></div>
@@ -103,24 +102,32 @@
     </div>
   </section>
 
-  <!-- SÅ FUNGERAR DET -->
+  <!-- OM FYNDBO -->
   <section class="py-20 bg-white text-center">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12">Så fungerar FyndBo</h2>
-    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
-      <div class="p-6 rounded-2xl bg-blue-50 shadow-md hover:shadow-xl transition">
-        <i class="fa-solid fa-user-plus text-4xl text-blue-700 mb-3"></i>
-        <h3 class="font-semibold text-xl text-blue-900 mb-2">Skapa konto</h3>
-        <p class="text-gray-700">Registrera dig snabbt och börja använda FyndBo direkt – helt gratis.</p>
-      </div>
-      <div class="p-6 rounded-2xl bg-blue-50 shadow-md hover:shadow-xl transition">
-        <i class="fa-solid fa-upload text-4xl text-blue-700 mb-3"></i>
-        <h3 class="font-semibold text-xl text-blue-900 mb-2">Publicera bostad</h3>
-        <p class="text-gray-700">Lägg upp din bostad med bilder, beskrivning och pris på bara några minuter.</p>
-      </div>
-      <div class="p-6 rounded-2xl bg-blue-50 shadow-md hover:shadow-xl transition">
-        <i class="fa-solid fa-house-chimney text-4xl text-blue-700 mb-3"></i>
-        <h3 class="font-semibold text-xl text-blue-900 mb-2">Hitta drömhemmet</h3>
-        <p class="text-gray-700">Utforska tusentals bostäder och hitta den som passar dig bäst.</p>
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-6">Vad är FyndBo?</h2>
+      <p class="text-gray-700 text-lg leading-relaxed mb-10">
+        FyndBo är mer än bara en bostadsportal – det är ett community för köpare, säljare och mäklare.
+        Vi kombinerar innovativ teknik med en mänsklig känsla.  
+        Med FyndBo hittar du ditt hem snabbare, enklare och tryggare än någonsin tidigare.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-8 text-left">
+        <div class="p-6 bg-blue-50 rounded-2xl shadow-md hover:shadow-xl transition">
+          <i class="fa-solid fa-shield-halved text-4xl text-blue-700 mb-3"></i>
+          <h3 class="font-semibold text-xl text-blue-900 mb-2">Trygghet i fokus</h3>
+          <p class="text-gray-700">Alla annonser granskas och verifieras – så att du kan känna dig säker i varje steg.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-2xl shadow-md hover:shadow-xl transition">
+          <i class="fa-solid fa-bolt text-4xl text-blue-700 mb-3"></i>
+          <h3 class="font-semibold text-xl text-blue-900 mb-2">Snabb & enkel</h3>
+          <p class="text-gray-700">Publicera bostäder eller upptäck nya hem på några sekunder – enkelt, snabbt och smidigt.</p>
+        </div>
+        <div class="p-6 bg-blue-50 rounded-2xl shadow-md hover:shadow-xl transition">
+          <i class="fa-solid fa-star text-4xl text-blue-700 mb-3"></i>
+          <h3 class="font-semibold text-xl text-blue-900 mb-2">Premiumupplevelse</h3>
+          <p class="text-gray-700">Vi lägger stor vikt vid design, användarvänlighet och innovation i varje detalj.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -129,25 +136,25 @@
   <section class="py-20 bg-gradient-to-b from-blue-50 to-white text-center">
     <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-12">Vad våra användare säger</h2>
     <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 px-6">
-      <div class="glass p-8 rounded-2xl text-left shadow-xl">
-        <p class="italic text-gray-200">“FyndBo gjorde det enkelt att sälja vårt hus. Vi fick över 50 visningar på två dagar!”</p>
+      <div class="bg-white p-8 rounded-2xl text-left shadow-xl border border-blue-100">
+        <p class="italic text-gray-600">“FyndBo gjorde det enkelt att sälja vårt hus. Vi fick över 50 visningar på två dagar!”</p>
         <div class="mt-4 flex items-center gap-3">
           <img src="https://randomuser.me/api/portraits/women/45.jpg" class="w-10 h-10 rounded-full">
-          <span class="text-white font-medium">– Anna L, Nacka</span>
+          <span class="text-blue-900 font-medium">– Anna L, Nacka</span>
         </div>
       </div>
-      <div class="glass p-8 rounded-2xl text-left shadow-xl">
-        <p class="italic text-gray-200">“Designen och enkelheten gör att man faktiskt vill använda sidan varje dag.”</p>
+      <div class="bg-white p-8 rounded-2xl text-left shadow-xl border border-blue-100">
+        <p class="italic text-gray-600">“Designen och enkelheten gör att man faktiskt vill använda sidan varje dag.”</p>
         <div class="mt-4 flex items-center gap-3">
           <img src="https://randomuser.me/api/portraits/men/35.jpg" class="w-10 h-10 rounded-full">
-          <span class="text-white font-medium">– Erik P, Uppsala</span>
+          <span class="text-blue-900 font-medium">– Erik P, Uppsala</span>
         </div>
       </div>
-      <div class="glass p-8 rounded-2xl text-left shadow-xl">
-        <p class="italic text-gray-200">“Det känns tryggt att annonsera via FyndBo. Supersnabb support dessutom!”</p>
+      <div class="bg-white p-8 rounded-2xl text-left shadow-xl border border-blue-100">
+        <p class="italic text-gray-600">“Det känns tryggt att annonsera via FyndBo. Supersnabb support dessutom!”</p>
         <div class="mt-4 flex items-center gap-3">
           <img src="https://randomuser.me/api/portraits/men/22.jpg" class="w-10 h-10 rounded-full">
-          <span class="text-white font-medium">– Daniel K, Göteborg</span>
+          <span class="text-blue-900 font-medium">– Daniel K, Göteborg</span>
         </div>
       </div>
     </div>
@@ -164,10 +171,9 @@
         <h4 class="font-bold text-lg mb-3">Länkar</h4>
         <ul class="space-y-2 text-blue-200">
           <li><a href="#" class="hover:text-white">Hem</a></li>
-          <li><a href="#" class="hover:text-white">Sök bostad</a></li>
           <li><a href="#" class="hover:text-white">Om oss</a></li>
+          <li><a href="#" class="hover:text-white">Tjänster</a></li>
           <li><a href="#" class="hover:text-white">Kontakt</a></li>
-          <li><a href="#" class="hover:text-white">Villkor</a></li>
         </ul>
       </div>
       <div>
@@ -176,7 +182,7 @@
       </div>
       <div>
         <h4 class="font-bold text-lg mb-3">Nyhetsbrev</h4>
-        <p class="text-blue-200 mb-3">Prenumerera och få nya bostäder först.</p>
+        <p class="text-blue-200 mb-3">Prenumerera och få nyheter först.</p>
         <div class="flex">
           <input type="email" placeholder="Din e-post" class="px-3 py-2 rounded-l bg-white text-gray-800 w-full focus:outline-none">
           <button class="bg-blue-700 px-4 py-2 rounded-r hover:bg-blue-600">OK</button>
