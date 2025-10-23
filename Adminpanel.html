@@ -1,1 +1,256 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FyndBo Adminpanel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f3f6fa;
+      color: #1f2937;
+      min-height: 100vh;
+    }
+
+    /* Login overlay */
+    #loginOverlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .login-box {
+      background: #fff;
+      padding: 40px 50px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 360px;
+      width: 100%;
+      position: relative;
+    }
+
+    .login-box img {
+      width: 100px;
+      margin-bottom: 15px;
+    }
+
+    .login-box h2 {
+      color: #0f4c81;
+      margin-bottom: 20px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    .login-box button {
+      background-color: #0f4c81;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: 0.3s;
+      width: 100%;
+    }
+
+    .login-box button:hover {
+      background-color: #073a5a;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* Admin Panel */
+    #adminPanel {
+      display: none;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #0f4c81;
+      color: #fff;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    .logout-btn {
+      background: #fff;
+      color: #0f4c81;
+      padding: 8px 18px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: #0f4c81;
+      color: #fff;
+      border: 1px solid #fff;
+    }
+
+    .panel-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    }
+
+    .card h3 {
+      color: #0f4c81;
+      margin-bottom: 10px;
+    }
+
+    .card i {
+      font-size: 2em;
+      color: #0f4c81;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #0f4c81;
+      font-size: 0.9em;
+      background: #e3f2fd;
+      margin-top: auto;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div id="loginOverlay">
+    <div class="login-box">
+      <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo Logo">
+      <h2>Admininloggning</h2>
+      <input type="text" id="username" placeholder="Användarnamn">
+      <input type="password" id="password" placeholder="Lösenord">
+      <button onclick="checkLogin()">Logga in</button>
+      <p class="error" id="errorMsg">Fel användarnamn eller lösenord</p>
+    </div>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div id="adminPanel">
+    <header>
+      <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo Logo">
+      <a href="#" class="logout-btn" onclick="logout()">Logga ut</a>
+    </header>
+
+    <div class="panel-content">
+      <div class="card">
+        <i class="fa-solid fa-house"></i>
+        <h3>Hantera bostäder</h3>
+        <p>Lägg till, redigera eller ta bort bostadsannonser.</p>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-users"></i>
+        <h3>Användare</h3>
+        <p>Se registrerade användare och administratörer.</p>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-chart-line"></i>
+        <h3>Statistik</h3>
+        <p>Visa webbplatsdata, sidvisningar och popularitet.</p>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-gear"></i>
+        <h3>Inställningar</h3>
+        <p>Hantera systeminställningar och kontoinformation.</p>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-envelope"></i>
+        <h3>Meddelanden</h3>
+        <p>Läs och svara på kontaktförfrågningar.</p>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-plus"></i>
+        <h3>Lägg till nytt objekt</h3>
+        <p>Publicera en ny annons direkt till bostadsflödet.</p>
+      </div>
+    </div>
+
+    <footer>
+      &copy; 2025 FyndBo – Adminpanel
+    </footer>
+  </div>
+
+  <script>
+    // Kontrollera login
+    function checkLogin() {
+      const user = document.getElementById("username").value.trim();
+      const pass = document.getElementById("password").value.trim();
+      const errorMsg = document.getElementById("errorMsg");
+
+      if (user === "Fyndbo-Admin" && pass === "FyndBo-1") {
+        document.getElementById("loginOverlay").style.display = "none";
+        document.getElementById("adminPanel").style.display = "flex";
+        localStorage.setItem("loggedIn", "true");
+      } else {
+        errorMsg.style.display = "block";
+      }
+    }
+
+    // Automatisk inloggning om man redan loggat in tidigare
+    if (localStorage.getItem("loggedIn") === "true") {
+      document.getElementById("loginOverlay").style.display = "none";
+      document.getElementById("adminPanel").style.display = "flex";
+    }
+
+    // Logga ut-funktion
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      document.getElementById("adminPanel").style.display = "none";
+      document.getElementById("loginOverlay").style.display = "flex";
+    }
+  </script>
+
+</body>
+</html>
 
