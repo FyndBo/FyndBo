@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FyndBo Adminpanel</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     :root {
       --blue: #0f4c81;
       --lightblue: #e3f2fd;
       --bg: #f4f6fa;
     }
+
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
@@ -20,108 +22,211 @@
       min-height: 100vh;
     }
 
-    /* LOGIN */
+    /* Login Overlay */
     #loginOverlay {
-      position: fixed; inset: 0;
+      position: fixed;
+      inset: 0;
       background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       z-index: 1000;
     }
+
     .login-box {
-      background: #fff; padding: 40px 50px; border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;
-      max-width: 360px; width: 100%;
-    }
-    .login-box img { width: 100px; margin-bottom: 10px; }
-    .login-box h2 { color: var(--blue); margin-bottom: 20px; }
-    .login-box input {
-      width: 100%; padding: 12px; margin-bottom: 15px;
-      border: 1px solid #ccc; border-radius: 8px;
-    }
-    .login-box button {
-      background: var(--blue); color: #fff; border: none; padding: 12px 30px;
-      border-radius: 8px; cursor: pointer; width: 100%; transition: 0.3s;
-    }
-    .login-box button:hover { background: #073a5a; }
-    .error { color: red; margin-top: 10px; display: none; }
-
-    /* LAYOUT */
-    #adminPanel { display: none; height: 100vh; display: flex; flex-direction: column; }
-    header {
-      background: var(--blue); color: #fff; display: flex; align-items: center;
-      justify-content: space-between; padding: 10px 25px;
-    }
-    header img { height: 70px; }
-    .logout-btn {
-      background: #fff; color: var(--blue); padding: 8px 18px; border-radius: 20px;
-      text-decoration: none; font-weight: 600; transition: 0.3s;
-    }
-    .logout-btn:hover { background: var(--blue); color: #fff; border: 1px solid #fff; }
-
-    .wrapper { display: flex; flex: 1; }
-    aside {
-      width: 250px; background: #ffffff; box-shadow: 2px 0 8px rgba(0,0,0,0.05);
-      padding: 20px 0; display: flex; flex-direction: column;
-    }
-    aside h3 { margin: 0 0 10px 25px; color: var(--blue); font-size: 1.1em; }
-    aside details { margin: 10px 0; }
-    aside summary {
-      font-weight: 600; padding: 10px 25px; color: var(--blue); cursor: pointer;
-      list-style: none;
-    }
-    aside a {
-      display: block; padding: 8px 40px; color: #333; text-decoration: none; font-size: 0.95em;
-      transition: 0.2s;
-    }
-    aside a:hover { background: var(--lightblue); color: var(--blue); }
-    main { flex: 1; padding: 30px; overflow-y: auto; }
-    main h1 { color: var(--blue); margin-bottom: 20px; font-size: 1.8em; }
-
-    /* Cards */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: #fff; border-radius: 12px; padding: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
-    .card i { font-size: 1.8em; color: var(--blue); margin-bottom: 8px; }
-    .card h3 { color: var(--blue); margin: 8px 0; }
-
-    footer {
-      text-align: center; padding: 15px; background: var(--lightblue); color: var(--blue);
-    }
-
-    /* Add Page Form */
-    form#addPageForm {
       background: #fff;
-      border-radius: 12px;
-      padding: 25px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      margin-top: 40px;
-      max-width: 420px;
-    }
-    form#addPageForm input {
+      padding: 40px 50px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 360px;
       width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+      animation: fadeIn 0.6s ease-out;
     }
-    form#addPageForm button {
+
+    .login-box img {
+      width: 120px;
+      margin-bottom: 10px;
+    }
+
+    .login-box h2 {
+      color: var(--blue);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .login-box button {
       background: var(--blue);
       color: #fff;
       border: none;
       padding: 12px 30px;
       border-radius: 8px;
       cursor: pointer;
+      width: 100%;
+      font-size: 15px;
+      transition: background 0.3s;
+    }
+
+    .login-box button:hover {
+      background: #073a5a;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* Panel Layout */
+    #adminPanel {
+      display: none;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--blue);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 25px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
+
+    header img {
+      height: 75px;
+    }
+
+    .logout-btn {
+      background: #fff;
+      color: var(--blue);
+      padding: 8px 18px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 600;
       transition: 0.3s;
     }
-    form#addPageForm button:hover { background: #073a5a; }
+
+    .logout-btn:hover {
+      background: var(--blue);
+      color: #fff;
+      border: 1px solid #fff;
+    }
+
+    /* Layout Wrapper */
+    .wrapper {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* Sidebar */
+    aside {
+      width: 240px;
+      background: #fff;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.08);
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    aside h3 {
+      margin: 0 0 10px 25px;
+      color: var(--blue);
+      font-size: 1.1em;
+    }
+
+    aside summary {
+      font-weight: 600;
+      padding: 10px 25px;
+      color: var(--blue);
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+
+    aside a {
+      display: block;
+      padding: 8px 40px;
+      color: #333;
+      text-decoration: none;
+      font-size: 0.95em;
+      transition: 0.2s;
+    }
+
+    aside a:hover {
+      background: var(--lightblue);
+      color: var(--blue);
+    }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      padding: 40px;
+      overflow-y: auto;
+    }
+
+    main h1 {
+      color: var(--blue);
+      margin-bottom: 25px;
+      font-size: 2em;
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      transition: transform .2s, box-shadow .2s;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.1);
+    }
+
+    .card i {
+      font-size: 2em;
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      color: var(--blue);
+      margin: 10px 0;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: var(--lightblue);
+      color: var(--blue);
+      font-size: 0.9em;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
@@ -148,6 +253,7 @@
   <div class="wrapper">
     <aside>
       <h3>Navigation</h3>
+
       <details open>
         <summary><i class="fa-solid fa-folder-open"></i> Sidor</summary>
         <div id="pageLinks"><p>Laddar sidor...</p></div>
@@ -169,8 +275,7 @@
 
     <main>
       <h1>Välkommen till FyndBos Adminpanel</h1>
-      <p id="statusMsg" style="color: gray;"></p>
-
+      <p id="statusMessage" style="margin-bottom:20px;color:gray;font-style:italic;">Hämtar data...</p>
       <div class="grid">
         <div class="card">
           <i class="fa-solid fa-house"></i>
@@ -185,7 +290,7 @@
         <div class="card">
           <i class="fa-solid fa-chart-line"></i>
           <h3>Statistik</h3>
-          <p>Visa webbplatsdata, sidvisningar och popularitet.</p>
+          <p>Visa webbplatsdata och prestanda.</p>
         </div>
         <div class="card">
           <i class="fa-solid fa-plus"></i>
@@ -193,79 +298,47 @@
           <p>Publicera en ny annons direkt till bostadsflödet.</p>
         </div>
       </div>
-
-      <!-- LÄGG TILL SIDA -->
-      <h2 style="color:var(--blue);margin-top:50px;">Lägg till ny sida</h2>
-      <form id="addPageForm">
-        <input type="text" id="newPageName" placeholder="Sidnamn (t.ex. Kontakt)" required>
-        <input type="text" id="newPageUrl" placeholder="URL (t.ex. Kontakt.html)" required>
-        <button type="submit">Lägg till sida</button>
-        <p id="addPageMsg"></p>
-      </form>
     </main>
   </div>
 
   <footer>&copy; 2025 FyndBo – Adminpanel</footer>
 </div>
 
-<!-- SUPABASE SCRIPT -->
+<!-- SCRIPT -->
 <script type="module">
-  import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
 
+  // Koppla till Supabase
   const supabase = createClient(
     "https://ymqwoiuhummwrtzfhbgm.supabase.co",
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InltcXdvaXVodW1td3J0emZoYmdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzMDYzOTAsImV4cCI6MjA3Njg4MjM5MH0.9s0iaJm_RGJxZFyPZqQyZvPCeCz60Q6P8EsPxfSO2AI"
   );
 
-  const container = document.getElementById("pageLinks");
-  const statusMsg = document.getElementById("statusMsg");
-
   async function loadPages() {
     const { data, error } = await supabase.from("pages").select("*");
+    const container = document.getElementById("pageLinks");
+    const status = document.getElementById("statusMessage");
+
     if (error) {
-      console.error(error);
-      container.innerHTML = "<p>Kunde inte hämta sidor.</p>";
-      statusMsg.textContent = "❌ Fel vid anslutning till databasen.";
-    } else {
-      container.innerHTML = data
-        .map(p => `<a href="${p.url}" target="_blank">${p.name}</a>`)
-        .join("");
-      statusMsg.textContent = "✅ Sidor hämtade från databasen!";
-    }
-  }
-
-  // LÄGG TILL NY SIDA
-  const form = document.getElementById("addPageForm");
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const name = document.getElementById("newPageName").value.trim();
-    const url = document.getElementById("newPageUrl").value.trim();
-    const msg = document.getElementById("addPageMsg");
-
-    if (!name || !url) {
-      msg.textContent = "Fyll i både namn och URL.";
-      msg.style.color = "red";
+      console.error("Fel vid hämtning:", error);
+      container.innerHTML = "<p style='color:red;'>Kunde inte hämta sidor.</p>";
+      status.innerText = "❌ Fel vid anslutning till databasen.";
       return;
     }
 
-    const { error } = await supabase.from("pages").insert([{ name, url }]);
-    if (error) {
-      console.error(error);
-      msg.textContent = "❌ Kunde inte lägga till sidan.";
-      msg.style.color = "red";
-    } else {
-      msg.textContent = "✅ Sidan lades till!";
-      msg.style.color = "green";
-      form.reset();
-      loadPages();
+    if (!data || data.length === 0) {
+      container.innerHTML = "<p>Inga sidor hittades</p>";
+      status.innerText = "⚠️ Inga sidor i databasen ännu.";
+      return;
     }
-  });
+
+    container.innerHTML = data.map(p => `<a href="${p.url}" target="_blank">${p.name}</a>`).join("");
+    status.innerText = "✅ Sidor hämtade från databasen!";
+  }
 
   document.addEventListener("DOMContentLoaded", loadPages);
-</script>
 
-<!-- LOGIN SCRIPT -->
-<script>
+  // Inloggning
   const _u = atob("RnluZGJvLUFkbWlu");
   const _p = atob("RnluZEJvLTE=");
 
@@ -292,6 +365,9 @@
     document.getElementById("adminPanel").style.display = "none";
     document.getElementById("loginOverlay").style.display = "flex";
   }
+
+  window.checkLogin = checkLogin;
+  window.logout = logout;
 </script>
 
 </body>
