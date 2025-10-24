@@ -90,7 +90,7 @@
   <script>
     const SUPABASE_URL = "https://ymqwoiuhummwrtzfhbgm.supabase.co";
     const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InltcXdvaXVodW1td3J0emZoYmdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzMDYzOTAsImV4cCI6MjA3Njg4MjM5MH0.9s0iaJm_RGJxZFyPZqQyZvPCeCz60Q6P8EsPxfSO2AI";
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     let mode = "login";
 
@@ -111,14 +111,14 @@
 
       try {
         if (mode === "register") {
-          const { data, error: signUpError } = await supabase.auth.signUp({ email, password });
+          const { data, error: signUpError } = await client.auth.signUp({ email, password });
           if (signUpError) throw signUpError;
-          message.textContent = "Registrering lyckades! Kolla din e-post för att bekräfta.";
+          message.textContent = "Registrering lyckades! Kolla din e-post för att bekräfta kontot.";
         } else {
-          const { data, error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+          const { data, error: signInError } = await client.auth.signInWithPassword({ email, password });
           if (signInError) throw signInError;
-          message.textContent = "Inloggning lyckades!";
-          setTimeout(() => (window.location.href = "adminpanel.html"), 1000);
+          message.textContent = "Inloggning lyckades! Du omdirigeras...";
+          setTimeout(() => (window.location.href = "adminpanel.html"), 1500);
         }
       } catch (err) {
         error.textContent = err.message;
