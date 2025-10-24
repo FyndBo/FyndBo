@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FyndBo - Logga in</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e9f2ff, #cfe0f9);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 350px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #0f4c81;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: #0f4c81;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #073a5a;
+    }
+
+    .toggle {
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: #0f4c81;
+      cursor: pointer;
+    }
+
+    .message {
+      margin-top: 15px;
+      color: green;
+      font-weight: 500;
+    }
+
+    .error {
+      color: red;
+      margin-top: 15px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>FyndBo Login</h1>
+    <input type="email" id="email" placeholder="E-postadress" />
+    <input type="password" id="password" placeholder="Lösenord" />
+    <button id="auth-btn">Logga in</button>
+    <div class="toggle" id="toggle-mode">Har du inget konto? Registrera dig</div>
+    <div class="message" id="message"></div>
+    <div class="error" id="error"></div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = "https://ymqwoiuhummwrtzfhbgm.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InltcXdvaXVodW1td3J0emZoYmdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzMDYzOTAsImV4cCI6MjA3Njg4MjM5MH0.9s0iaJm_RGJxZFyPZqQyZvPCeCz60Q6P8EsPxfSO2AI";
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    let mode = "login";
+
+    document.getElementById("toggle-mode").addEventListener("click", () => {
+      mode = mode === "login" ? "register" : "login";
+      document.getElementById("auth-btn").innerText = mode === "login" ? "Logga in" : "Registrera";
+      document.getElementById("toggle-mode").innerText =
+        mode === "login" ? "Har du inget konto? Registrera dig" : "Har du redan ett konto? Logga in";
+    });
+
+    document.getElementById("auth-btn").addEventListener("click", async () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const message = document.getElementById("message");
+      const error = document.getElementById("error");
+      message.textContent = "";
+      error.textContent = "";
+
+      try {
+        if (mode === "register") {
+          const { data, error: signUpError } = await supabase.auth.signUp({ email, password });
+          if (signUpError) throw signUpError;
+          message.textContent = "Registrering lyckades! Kolla din e-post för att bekräfta.";
+        } else {
+          const { data, error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+          if (signInError) throw signInError;
+          message.textContent = "Inloggning lyckades!";
+          setTimeout(() => (window.location.href = "adminpanel.html"), 1000);
+        }
+      } catch (err) {
+        error.textContent = err.message;
+      }
+    });
+  </script>
+</body>
+</html>
