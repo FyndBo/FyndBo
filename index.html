@@ -19,9 +19,10 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      overflow-x: hidden;
     }
 
-    /* Diskret länk till Admin Panel */
+    /* Knapp till Admin Panel */
     .to-admin {
       position: absolute;
       top: 20px;
@@ -140,19 +141,38 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
+    /* Responsivitet */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2em;
+      }
+      .countdown {
+        font-size: 1.5em;
+      }
+      .info-button {
+        padding: 12px 25px;
+        font-size: 1em;
+      }
+      .to-admin {
+        top: 10px;
+        right: 10px;
+        padding: 6px 12px;
+      }
+    }
   </style>
 </head>
 <body>
 
   <!-- Knapp till Admin Panel -->
-  <a href="Adminpanel.html" class="to-admin">Admin Panel</a>
+  <a href="adminpanel.html" class="to-admin">Admin Panel</a>
 
   <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo Logo" class="logo">
   <h1>Hej!</h1>
   <p>Denna hemsida är under konstruktion.<br>Planerad publicering: 2026-06-24</p>
 
   <div class="countdown" id="countdown"></div>
-  <a href="Fyndbo.se-läs_mer.html" class="info-button">Läs mer om FyndBo</a>
+
+  <a href="fyndbo.se-läs_mer.html" class="info-button">Läs mer om FyndBo</a>
 
   <div class="social-links">
     <a href="https://www.instagram.com/fyndbo/" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -197,7 +217,11 @@
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      if (distance < 0) {
+        countdownElement.innerHTML = "Vi är live!";
+      } else {
+        countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
     }
 
     setInterval(updateCountdown, 1000);
