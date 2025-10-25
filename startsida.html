@@ -1,87 +1,137 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>FyndBo | Sök fastigheter</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FyndBo | Sök bostäder</title>
 <link rel="icon" href="images/FyndBo-blue-removebg-preview.png">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-html { color-scheme: light; }
-body { font-family: 'Poppins', sans-serif; background-color: #f5f8fb; }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f5f8fb;
+  margin: 0;
+  color: #1e293b;
+}
 
 /* HEADER */
 header {
-  position: fixed; top: 0; left: 0;
-  width: 100%; z-index: 50;
+  position: fixed;
+  top: 0; left: 0; width: 100%;
   background: rgba(15, 76, 129, 0.9);
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  border-bottom: 1px solid rgba(255,255,255,0.15);
   height: 70px;
   display: flex; align-items: center;
+  z-index: 50;
 }
 header a { color: white; transition: opacity 0.2s ease; }
 header a:hover { opacity: 0.85; }
 
-/* SEARCH PANEL */
-.search-panel {
-  margin-top: 110px;
+/* MAIN SECTION */
+.main-section {
+  margin-top: 100px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  gap: 30px;
+  padding: 0 30px;
+}
+.search-area {
+  flex: 1;
   background: white;
   border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-  padding: 25px 20px;
-  max-width: 1200px;
-  margin-left: auto; margin-right: auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-
-select, input {
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
-  padding: 10px 15px;
+.map-area {
+  flex: 1.3;
+  background: #e2e8f0;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  position: relative;
+}
+.map-area img {
   width: 100%;
-  font-size: 1rem;
-  background-color: #fff;
-  transition: box-shadow 0.2s ease;
-}
-select:focus, input:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(15,76,129,0.25);
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
 }
 
-button.search-btn {
-  background-color: #0f4c81;
-  color: white;
-  font-weight: 600;
-  border-radius: 10px;
+/* SEARCH INPUT */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8fafc;
+  border: 2px solid #cbd5e1;
+  border-radius: 50px;
   padding: 12px 20px;
-  transition: all 0.3s;
+  transition: box-shadow 0.3s ease;
 }
-button.search-btn:hover { background-color: #073a5a; }
+.search-box:focus-within {
+  box-shadow: 0 0 0 4px rgba(15, 76, 129, 0.25);
+}
+.search-box input {
+  border: none;
+  outline: none;
+  flex: 1;
+  background: transparent;
+  font-size: 1.1rem;
+  color: #1e293b;
+}
+.search-box i {
+  color: #0f4c81;
+  font-size: 1.3rem;
+}
 
-/* PROPERTY CARDS */
-.results-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 25px;
+/* FILTER BUTTONS */
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 25px;
+}
+.filter-buttons button {
+  background: #f1f5f9;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-weight: 500;
+  color: #0f4c81;
+  transition: all 0.3s ease;
+}
+.filter-buttons button:hover,
+.filter-buttons button.active {
+  background: #0f4c81;
+  color: white;
+}
+
+/* RESULTS */
+.results {
   margin-top: 40px;
 }
 .property-card {
-  background: white;
+  background: #fff;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 .property-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
 }
 .property-card img {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
 }
 .property-card .info {
@@ -91,11 +141,10 @@ button.search-btn:hover { background-color: #073a5a; }
   font-weight: 600;
   font-size: 1.1rem;
   color: #0f4c81;
-  margin-bottom: 6px;
 }
 .property-card .info p {
-  font-size: 0.95rem;
   color: #475569;
+  font-size: 0.95rem;
 }
 
 /* FOOTER */
@@ -103,8 +152,9 @@ footer {
   margin-top: 100px;
   background: #0f4c81;
   color: white;
+  text-align: center;
+  padding: 25px 0;
 }
-footer a:hover { color: #fff; }
 </style>
 </head>
 
@@ -125,119 +175,56 @@ footer a:hover { color: #fff; }
   </div>
 </header>
 
-<!-- SEARCH BAR -->
-<section class="search-panel">
-  <form class="grid md:grid-cols-6 gap-4">
-    <input type="text" placeholder="Stad / område" />
-    <select>
-      <option selected disabled>Typ av fastighet</option>
-      <option>Villa</option>
-      <option>Lägenhet</option>
-      <option>Radhus</option>
-      <option>Gård</option>
-      <option>Skog / Mark</option>
-      <option>Kommersiell</option>
-    </select>
-    <select>
-      <option selected disabled>Prisintervall</option>
-      <option>0 - 1 Mkr</option>
-      <option>1 - 3 Mkr</option>
-      <option>3 - 5 Mkr</option>
-      <option>5 - 10 Mkr</option>
-      <option>10+ Mkr</option>
-    </select>
-    <select>
-      <option selected disabled>Antal rum</option>
-      <option>1+</option>
-      <option>2+</option>
-      <option>3+</option>
-      <option>4+</option>
-      <option>5+</option>
-    </select>
-    <select>
-      <option selected disabled>Boarea</option>
-      <option>0–50 m²</option>
-      <option>50–100 m²</option>
-      <option>100–200 m²</option>
-      <option>200+ m²</option>
-    </select>
-    <button type="button" class="search-btn w-full">Sök</button>
-  </form>
-</section>
+<!-- MAIN CONTENT -->
+<section class="main-section">
 
-<!-- SEARCH RESULTS -->
-<section class="max-w-7xl mx-auto px-6 mt-10">
-  <h2 class="text-3xl font-bold text-[#0f4c81] mb-8 text-center">Tillgängliga fastigheter</h2>
-  <div class="results-grid">
+  <!-- VÄNSTRA SIDAN -->
+  <div class="search-area">
+    <h1 class="text-3xl font-extrabold text-[#0f4c81] mb-6">Hitta ditt drömhem</h1>
 
-    <div class="property-card">
-      <img src="images/house1.jpg" alt="Villa i Stockholm">
-      <div class="info">
-        <h3>Villa i Stockholm</h3>
-        <p>6 rum • 190 m² • 7.2 Mkr</p>
-      </div>
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Sök efter stad, område eller fastighetstyp..." />
     </div>
 
-    <div class="property-card">
-      <img src="images/apartment1.jpg" alt="Lägenhet i Göteborg">
-      <div class="info">
-        <h3>Lägenhet i Göteborg</h3>
-        <p>3 rum • 80 m² • 3.4 Mkr</p>
-      </div>
+    <div class="filter-buttons">
+      <button class="active">Alla</button>
+      <button>Hus</button>
+      <button>Lägenhet</button>
+      <button>Radhus</button>
+      <button>Gård</button>
+      <button>Skog</button>
+      <button>Kommersiell</button>
     </div>
 
-    <div class="property-card">
-      <img src="images/farm1.jpg" alt="Gård i Dalarna">
-      <div class="info">
-        <h3>Gård i Dalarna</h3>
-        <p>9 rum • 320 m² • 5.8 Mkr</p>
+    <div class="results grid grid-cols-2 gap-4 mt-8">
+      <div class="property-card">
+        <img src="images/house1.jpg" alt="Villa i Stockholm">
+        <div class="info">
+          <h3>Villa i Stockholm</h3>
+          <p>6 rum • 190 m² • 7.2 Mkr</p>
+        </div>
+      </div>
+      <div class="property-card">
+        <img src="images/apartment1.jpg" alt="Lägenhet i Göteborg">
+        <div class="info">
+          <h3>Lägenhet i Göteborg</h3>
+          <p>3 rum • 80 m² • 3.4 Mkr</p>
+        </div>
       </div>
     </div>
-
-    <div class="property-card">
-      <img src="images/forest1.jpg" alt="Skogsmark i Småland">
-      <div class="info">
-        <h3>Skogsmark i Småland</h3>
-        <p>120 ha • 4.2 Mkr</p>
-      </div>
-    </div>
-
   </div>
+
+  <!-- HÖGRA SIDAN -->
+  <div class="map-area">
+    <img src="images/sweden-map.png" alt="Karta över Sverige">
+  </div>
+
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-4 gap-10">
-    <div>
-      <img src="images/FyndBo-blue-removebg-preview.png" class="h-28 mb-4" alt="FyndBo">
-      <p class="text-blue-100 text-lg leading-relaxed">
-        Din plattform för att hitta och sälja fastigheter – framtidens marknad, idag.
-      </p>
-    </div>
-    <div>
-      <h4 class="font-bold text-lg mb-3">Länkar</h4>
-      <ul class="space-y-2 text-blue-100">
-        <li><a href="startsida.html" class="hover:text-white">Hem</a></li>
-        <li><a href="fyndbo.se-läs_mer.html" class="hover:text-white">Om oss</a></li>
-        <li><a href="#" class="hover:text-white">Kontakt</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4 class="font-bold text-lg mb-3">Kontakt</h4>
-      <p class="text-blue-100">info@fyndbo.se<br>08–123 45 67<br>Stockholm, Sverige</p>
-    </div>
-    <div>
-      <h4 class="font-bold text-lg mb-3">Nyhetsbrev</h4>
-      <p class="text-blue-100 mb-3">Prenumerera och få nyheter först.</p>
-      <div class="flex">
-        <input type="email" placeholder="Din e-post" class="px-3 py-2 rounded-l bg-white text-gray-800 w-full focus:outline-none">
-        <button class="bg-[#073a5a] px-4 py-2 rounded-r hover:bg-[#0f4c81] transition">OK</button>
-      </div>
-    </div>
-  </div>
-  <div class="border-t border-blue-900 py-6 text-center text-sm text-blue-200">
-    © 2025 FyndBo. Alla rättigheter förbehållna.
-  </div>
+  © 2025 FyndBo – Din bostadsportal.
 </footer>
 
 </body>
