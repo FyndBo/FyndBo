@@ -25,12 +25,15 @@ body{
   min-height:100vh;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 .header{
-  position:sticky; top:0; z-index:50;
+  position:sticky;
+  top:0;
+  z-index:50;
   background:linear-gradient(135deg,#2a6fc1 0%, #1e5fa5 60%, #1b4e88 100%);
-  color:#fff; box-shadow:var(--shadow);
-  padding:6px 0;
+  color:#fff;
+  box-shadow:var(--shadow);
+  padding:4px 0;
 }
 .header-inner{
   max-width:1200px;
@@ -47,14 +50,14 @@ body{
   cursor:pointer;
 }
 .brand img{
-  height:70px;
+  height:100px; /* större logga */
   transition:.2s;
-  filter:drop-shadow(0 4px 10px rgba(0,0,0,.2));
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.25));
 }
 .brand img:hover{transform:scale(1.05)}
 .brand h1{
   margin:0;
-  font-size:1.1rem;
+  font-size:1.2rem;
   font-weight:600;
   letter-spacing:.3px;
   opacity:.95;
@@ -63,7 +66,7 @@ body{
   appearance:none;
   border:0;
   border-radius:999px;
-  padding:8px 16px;
+  padding:8px 18px;
   font-weight:600;
   cursor:pointer;
   transition:.2s;
@@ -78,7 +81,7 @@ body{
   outline:2px solid #fff;
 }
 
-/* ===== LAYOUT ===== */
+/* LAYOUT */
 .shell{
   max-width:1200px;
   margin:24px auto;
@@ -88,7 +91,7 @@ body{
   gap:24px;
 }
 
-/* ===== SIDEBAR ===== */
+/* SIDEBAR */
 .sidebar{
   background:var(--panel);
   backdrop-filter:saturate(140%) blur(6px);
@@ -140,7 +143,7 @@ body{
   padding:6px 18px;
 }
 
-/* ===== MAIN ===== */
+/* MAIN */
 .main{
   display:flex;
   flex-direction:column;
@@ -153,39 +156,46 @@ body{
   box-shadow:var(--shadow);
   padding:18px 22px;
 }
+
+/* CARDS */
 .kpis{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:20px;
 }
 .card{
   background:#fff;
   border:1px solid var(--stroke);
-  border-radius:18px;
+  border-radius:16px;
   box-shadow:var(--shadow);
   transition:.2s;
-  overflow:hidden;
+  padding:18px;
   text-align:center;
+  cursor:pointer;
+  text-decoration:none;
+  color:inherit;
 }
-.card:hover{transform:translateY(-3px)}
-.card img{
-  width:100%;
-  height:130px;
-  object-fit:cover;
-  border-bottom:1px solid var(--stroke);
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(0,0,0,.1);
+}
+.card i{
+  font-size:2rem;
+  color:var(--primary);
+  margin-bottom:10px;
 }
 .card h3{
-  margin:12px 0 6px;
+  margin:0 0 6px;
   color:var(--primary);
   font-size:1.05rem;
 }
 .card p{
-  margin:0 0 14px;
+  margin:0;
   color:#445063;
-  font-size:.95rem;
+  font-size:.93rem;
 }
 
-/* ===== FORM ===== */
+/* FORM */
 .panel{
   background:#fff;
   border:1px solid var(--stroke);
@@ -222,7 +232,7 @@ body{
   font-size:.9rem;
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 .footer{
   padding:22px 0 34px;
   text-align:center;
@@ -250,7 +260,6 @@ body{
 
 <!-- PAGE -->
 <div class="shell" id="adminPanel" style="display:none;">
-
   <aside class="sidebar">
     <div class="sb-title">Navigation</div>
 
@@ -277,26 +286,26 @@ body{
     </section>
 
     <section class="kpis">
-      <div class="card">
-        <img src="images/bostader.jpg" alt="Bostäder">
+      <a href="bostader.html" class="card">
+        <i class="fa-solid fa-house"></i>
         <h3>Hantera bostäder</h3>
-        <p>Lägg till, redigera eller ta bort bostadsannonser.</p>
-      </div>
-      <div class="card">
-        <img src="images/anvandare.jpg" alt="Användare">
+        <p>Lägg till, redigera eller ta bort bostäder.</p>
+      </a>
+      <a href="anvandare.html" class="card">
+        <i class="fa-solid fa-users"></i>
         <h3>Användare</h3>
         <p>Se registrerade användare och administratörer.</p>
-      </div>
-      <div class="card">
-        <img src="images/statistik.jpg" alt="Statistik">
+      </a>
+      <a href="statistik.html" class="card">
+        <i class="fa-solid fa-chart-line"></i>
         <h3>Statistik</h3>
-        <p>Visa sidvisningar och popularitet.</p>
-      </div>
-      <div class="card">
-        <img src="images/nyttobjekt.jpg" alt="Nytt objekt">
+        <p>Visa webbplatsdata och sidvisningar.</p>
+      </a>
+      <a href="nyttobjekt.html" class="card">
+        <i class="fa-solid fa-plus"></i>
         <h3>Lägg till nytt objekt</h3>
-        <p>Publicera nya annonser.</p>
-      </div>
+        <p>Publicera en ny annons.</p>
+      </a>
     </section>
 
     <section class="panel">
@@ -359,16 +368,6 @@ document.getElementById("addPageForm").addEventListener("submit",async e=>{
 <!-- Login Script -->
 <script>
 const _u=atob("RnluZGJvLUFkbWlu"),_p=atob("RnluZEJvLTE=");
-function checkLogin(){
-  const u=document.getElementById("username").value.trim(),
-  p=document.getElementById("password").value.trim(),
-  e=document.getElementById("errorMsg");
-  if(u===_u&&p===_p){
-    document.getElementById("loginOverlay").style.display="none";
-    document.getElementById("adminPanel").style.display="grid";
-    localStorage.setItem("loggedIn","true");
-  }else e.style.display="block";
-}
 if(localStorage.getItem("loggedIn")==="true"){
   document.getElementById("adminPanel").style.display="grid";
 }
