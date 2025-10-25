@@ -18,9 +18,10 @@ header {
   top: 0; left: 0;
   width: 100%;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  background: rgba(15, 76, 129, 0.85); /* blåtonad header */
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
   height: 70px;
   display: flex;
   align-items: center;
@@ -28,8 +29,12 @@ header {
 }
 header.hidden-header { transform: translateY(-100%); opacity: 0; }
 header.visible-header { transform: translateY(0); opacity: 1; }
-nav a { transition: color 0.3s ease; }
-nav a:hover { color: #0f4c81; }
+
+nav a {
+  color: rgba(255,255,255,0.9);
+  transition: color 0.3s ease;
+}
+nav a:hover { color: #ffffff; }
 
 /* --- HERO SECTION --- */
 .hero {
@@ -118,11 +123,6 @@ nav a:hover { color: #0f4c81; }
   60% {transform: translate(-50%,-5px);}
 }
 
-/* --- CONTENT SECTIONS --- */
-section { scroll-margin-top: 80px; }
-.fade-section { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
-.fade-section.visible { opacity: 1; transform: translateY(0); }
-
 /* --- CARDS --- */
 .card {
   background: rgba(255,255,255,0.85);
@@ -151,12 +151,12 @@ footer a:hover { color: #fff; }
     <div class="flex items-center gap-3 cursor-pointer" onclick="location.href='startsida.html'">
       <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo" class="h-14 md:h-16 drop-shadow-lg">
     </div>
-    <nav class="hidden md:flex items-center gap-10 text-gray-800 font-semibold text-lg">
+    <nav class="hidden md:flex items-center gap-10 text-lg font-semibold">
       <a href="#hem">Hem</a>
       <a href="fyndbo.se-läs_mer.html">Om oss</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
-    <a href="login.html" class="px-6 py-2 rounded-full bg-[#0f4c81] text-white text-lg font-semibold hover:bg-[#073a5a] transition">Logga in</a>
+    <a href="login.html" class="px-6 py-2 rounded-full bg-white text-[#0f4c81] text-lg font-semibold hover:bg-blue-100 transition">Logga in</a>
   </div>
 </header>
 
@@ -164,8 +164,8 @@ footer a:hover { color: #fff; }
 <section id="hem" class="hero">
   <div class="hero-content">
     <h1>Hitta ditt nästa drömhem</h1>
-    <p>Upplev en ny nivå av bostadssök – byggd med trygghet, enkelhet och teknik i världsklass.</p>
-    <a href="Bostader.html" class="btn">Utforska bostäder</a>
+    <p>Upplev en ny nivå av fastighetssök – byggd för trygghet, enkelhet och innovation.</p>
+    <a href="fastighetssök.html" class="btn">Utforska fastigheter</a>
   </div>
   <div class="scroll-indicator"><i class="fa-solid fa-chevron-down"></i></div>
 </section>
