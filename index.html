@@ -1,231 +1,197 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FyndBo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
-      color: #1f2937;
-      text-align: center;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FyndBo – Under konstruktion</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    /* Knapp till Admin Panel */
-    .to-admin {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 0.95em;
-      padding: 8px 18px;
-      border: 1px solid #0f4c81;
-      border-radius: 20px;
-      color: #0f4c81;
-      text-decoration: none;
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(5px);
-      transition: all 0.3s ease;
-    }
+<style>
+:root {
+  --primary:#0f4c81;
+  --accent:#073a5a;
+  --bg1:#f4f7fb;
+  --bg2:#dfe9f3;
+}
 
-    .to-admin:hover {
-      background: #0f4c81;
-      color: #fff;
-    }
+html { color-scheme: light; }
+body {
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:#1f2937;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  text-align:center;
+  padding:30px 15px;
+  overflow-x:hidden;
+  animation:fadeIn 0.8s ease-out;
+}
 
-    .logo {
-      max-width: 250px;
-      margin: 50px auto 30px;
-    }
+@keyframes fadeIn {from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:none;}}
 
-    h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 3em;
-      color: #0f4c81;
-      margin-bottom: 20px;
-    }
+/* --- Card --- */
+.container {
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(10px);
+  border-radius:18px;
+  padding:40px 35px;
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+  max-width:600px;
+  width:100%;
+}
 
-    p {
-      font-size: 1.2em;
-      margin-bottom: 30px;
-    }
+/* --- Logo --- */
+.logo {
+  max-width:220px;
+  margin-bottom:20px;
+  user-select:none;
+}
 
-    .countdown {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2em;
-      color: #0f4c81;
-      margin-bottom: 40px;
-    }
+/* --- Text --- */
+h1 {
+  font-family:'Montserrat',sans-serif;
+  font-size:2.3rem;
+  color:var(--primary);
+  margin:0 0 10px;
+}
+p {
+  font-size:1.1rem;
+  line-height:1.6;
+  margin:0 0 25px;
+}
 
-    .info-button {
-      display: inline-block;
-      padding: 15px 30px;
-      background-color: #0f4c81;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: background-color 0.3s;
-      margin-bottom: 20px;
-    }
+/* --- Countdown --- */
+.countdown {
+  font-family:'Montserrat',sans-serif;
+  font-size:1.6rem;
+  color:var(--primary);
+  margin-bottom:30px;
+}
 
-    .info-button:hover {
-      background-color: #073a5a;
-    }
+/* --- Buttons --- */
+.btn {
+  display:inline-block;
+  background:var(--primary);
+  color:#fff;
+  text-decoration:none;
+  padding:14px 30px;
+  border-radius:10px;
+  font-weight:600;
+  transition:all 0.25s ease;
+}
+.btn:hover {
+  background:var(--accent);
+  transform:translateY(-2px);
+}
+.to-admin {
+  position:absolute;
+  top:20px;right:20px;
+  font-size:.9rem;
+  background:rgba(255,255,255,0.5);
+  border:1px solid var(--primary);
+  color:var(--primary);
+  border-radius:999px;
+  padding:8px 18px;
+  text-decoration:none;
+  backdrop-filter:blur(6px);
+  transition:.3s;
+}
+.to-admin:hover{background:var(--primary);color:#fff;}
 
-    .social-links {
-      margin-top: 20px;
-    }
+/* --- Social icons --- */
+.social-links {
+  margin-top:25px;
+}
+.social-links a {
+  color:var(--primary);
+  font-size:1.8rem;
+  margin:0 12px;
+  transition:color .2s;
+}
+.social-links a:hover {color:var(--accent);}
 
-    .social-links a {
-      margin: 0 15px;
-      color: #0f4c81;
-      font-size: 2em;
-      transition: color 0.3s;
-    }
+/* --- Footer Info --- */
+.features {
+  text-align:left;
+  margin-top:35px;
+  font-size:1rem;
+  color:#374151;
+}
+.features h2 {
+  font-family:'Montserrat',sans-serif;
+  color:var(--primary);
+  font-size:1.3rem;
+}
+.features ul {
+  list-style:none;
+  padding-left:0;
+}
+.features li::before {
+  content:"✔";
+  color:var(--primary);
+  margin-right:10px;
+}
 
-    .social-links a:hover {
-      color: #073a5a;
-    }
-
-    .additional-info {
-      max-width: 800px;
-      margin: 50px auto 30px;
-      text-align: left;
-      padding: 0 20px;
-    }
-
-    .additional-info h2 {
-      font-family: 'Montserrat', sans-serif;
-      color: #0f4c81;
-      margin-top: 40px;
-      font-size: 2em;
-    }
-
-    .additional-info p, .additional-info li {
-      font-size: 1.15em;
-      margin-bottom: 15px;
-    }
-
-    .feature-item::before {
-      content: "✔";
-      margin-right: 10px;
-      color: #0f4c81;
-    }
-
-    .quote {
-      font-style: italic;
-      background: rgba(15,76,129,0.1);
-      border-left: 5px solid #0f4c81;
-      padding: 15px 20px;
-      margin: 20px 0;
-    }
-
-    .img-section {
-      text-align: center;
-      margin: 30px 0;
-    }
-
-    .img-section img {
-      max-width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-
-    /* Responsivitet */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2.2em;
-      }
-      .countdown {
-        font-size: 1.5em;
-      }
-      .info-button {
-        padding: 12px 25px;
-        font-size: 1em;
-      }
-      .to-admin {
-        top: 10px;
-        right: 10px;
-        padding: 6px 12px;
-      }
-    }
-  </style>
+/* --- Responsive --- */
+@media(max-width:600px){
+  .container{padding:25px 20px;}
+  h1{font-size:1.9rem;}
+  .countdown{font-size:1.3rem;}
+  .logo{max-width:180px;}
+}
+</style>
 </head>
 <body>
 
-  <!-- Knapp till Admin Panel -->
-  <a href="adminpanel.html" class="to-admin">Admin Panel</a>
+<a href="adminpanel.html" class="to-admin">Adminpanel</a>
 
-  <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo Logo" class="logo">
-  <h1>Hej!</h1>
-  <p>Denna hemsida är under konstruktion.<br>Planerad publicering: 2026-06-24</p>
+<div class="container">
+  <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo logotyp" class="logo">
 
-  <div class="countdown" id="countdown"></div>
+  <h1>Vi bygger något fantastiskt!</h1>
+  <p>Hemsidan är just nu under utveckling. Lansering planeras till <strong>24 juni 2026</strong>.</p>
 
-  <a href="fyndbo.se-läs_mer.html" class="info-button">Läs mer om FyndBo</a>
+  <div class="countdown" id="countdown">Laddar...</div>
+
+  <a href="fyndbo.se-läs_mer.html" class="btn">Läs mer om FyndBo</a>
 
   <div class="social-links">
     <a href="https://www.instagram.com/fyndbo/" target="_blank"><i class="fab fa-instagram"></i></a>
     <a href="https://www.youtube.com/@FyndBo" target="_blank"><i class="fab fa-youtube"></i></a>
   </div>
 
-  <div class="additional-info">
-    <h2>Om FyndBo</h2>
-    <p>FyndBo är en modern bostadsportal som gör bostadsletande enklare och mer intuitivt. Vår vision är att hjälpa människor att hitta sitt drömhem på ett smartare sätt.</p>
-
-    <h2>Företagets historia</h2>
-    <p>Konceptet föddes ur en passion för teknik, design och innovation. Målet är att kombinera traditionella bostadsannonser med AI-rekommendationer.</p>
-
+  <div class="features">
+    <h2>Vad du kan vänta dig:</h2>
     <ul>
-      <li class="feature-item">Smarta filter och kategorier</li>
-      <li class="feature-item">Detaljerad information om bostäder</li>
-      <li class="feature-item">AI-rekommendationer</li>
-      <li class="feature-item">Interaktiv design</li>
-    </ul>
-
-    <div class="quote">"Vi vill skapa en plattform där bostadsletande blir roligt, smart och enkelt – och där alla kan hitta sitt drömhem."</div>
-
-    <h2>Framtida funktioner</h2>
-    <ul>
-      <li class="feature-item">Interaktiva kartor</li>
-      <li class="feature-item">Notifieringar för nya objekt</li>
-      <li class="feature-item">Integration med sociala medier</li>
-      <li class="feature-item">Detaljerade analyser av bostadsmarknaden</li>
+      <li>Smarta filter och sökfunktioner</li>
+      <li>AI-baserade bostadsrekommendationer</li>
+      <li>Interaktiv karta över objekt</li>
+      <li>Notifieringar när nya bostäder dyker upp</li>
     </ul>
   </div>
+</div>
 
-  <script>
-    const countDate = new Date("2026-06-24T00:00:00").getTime();
-    const countdownElement = document.getElementById("countdown");
+<script>
+const countDate=new Date("2026-06-24T00:00:00").getTime();
+const countdown=document.getElementById("countdown");
+function updateCountdown(){
+  const now=new Date().getTime();
+  const dist=countDate-now;
+  if(dist<0){countdown.innerHTML="🎉 Vi är live!";return;}
+  const d=Math.floor(dist/(1000*60*60*24));
+  const h=Math.floor((dist%(1000*60*60*24))/(1000*60*60));
+  const m=Math.floor((dist%(1000*60*60))/(1000*60));
+  const s=Math.floor((dist%(1000*60))/1000);
+  countdown.innerHTML=`${d}d ${h}h ${m}m ${s}s`;
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
+</script>
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = countDate - now;
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      if (distance < 0) {
-        countdownElement.innerHTML = "Vi är live!";
-      } else {
-        countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-      }
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-  </script>
 </body>
 </html>
