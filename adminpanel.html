@@ -9,210 +9,308 @@
 
 <style>
 :root{
-  --primary:#1e5fa5;           /* ljusare blå */
+  --primary:#1e5fa5;
   --primary-dark:#144a85;
   --bg:#f5f8fc;
-  --panel:#ffffffcc;            /* glassy vit */
+  --panel:#ffffffcc;
   --stroke:#e6eef7;
-  --shadow:0 10px 30px rgba(0,0,0,.08);
+  --shadow:0 6px 18px rgba(0,0,0,.08);
 }
 *{box-sizing:border-box}
-html,body{height:100%}
 body{
-  margin:0; font-family:'Poppins',sans-serif; background:var(--bg); color:#0f1b2d;
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:var(--bg);
+  color:#0f1b2d;
+  min-height:100vh;
 }
 
-/* ====== HEADER ====== */
+/* ===== HEADER ===== */
 .header{
   position:sticky; top:0; z-index:50;
   background:linear-gradient(135deg,#2a6fc1 0%, #1e5fa5 60%, #1b4e88 100%);
   color:#fff; box-shadow:var(--shadow);
+  padding:6px 0;
 }
 .header-inner{
-  max-width:1200px; margin:0 auto; padding:14px 22px;
-  display:flex; align-items:center; justify-content:space-between;
+  max-width:1200px;
+  margin:0 auto;
+  padding:8px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
-.brand{display:flex; align-items:center; gap:14px; cursor:pointer}
-.brand img{height:120px; filter:drop-shadow(0 6px 12px rgba(0,0,0,.25)); transition:.2s}
-.brand img:hover{transform:scale(1.03)}
-.brand h1{margin:0; font-size:1.25rem; font-weight:600; letter-spacing:.3px; opacity:.95}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  cursor:pointer;
+}
+.brand img{
+  height:70px;
+  transition:.2s;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.2));
+}
+.brand img:hover{transform:scale(1.05)}
+.brand h1{
+  margin:0;
+  font-size:1.1rem;
+  font-weight:600;
+  letter-spacing:.3px;
+  opacity:.95;
+}
 .btn{
-  appearance:none; border:0; border-radius:999px; padding:10px 18px;
-  font-weight:600; cursor:pointer; transition:.2s; box-shadow:0 6px 16px rgba(0,0,0,.12);
+  appearance:none;
+  border:0;
+  border-radius:999px;
+  padding:8px 16px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.2s;
 }
-.btn-ghost{background:#ffffff; color:var(--primary)}
-.btn-ghost:hover{background:transparent; color:#fff; outline:2px solid #fff}
+.btn-ghost{
+  background:#ffffff;
+  color:var(--primary);
+}
+.btn-ghost:hover{
+  background:transparent;
+  color:#fff;
+  outline:2px solid #fff;
+}
 
-/* ====== LAYOUT ====== */
-.shell{max-width:1200px; margin:24px auto; padding:0 22px; display:grid; grid-template-columns:280px 1fr; gap:24px}
+/* ===== LAYOUT ===== */
+.shell{
+  max-width:1200px;
+  margin:24px auto;
+  padding:0 22px;
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:24px;
+}
 
-/* ====== SIDEBAR ====== */
+/* ===== SIDEBAR ===== */
 .sidebar{
-  background:var(--panel); backdrop-filter:saturate(140%) blur(6px);
-  border:1px solid var(--stroke); border-radius:18px; box-shadow:var(--shadow);
-  padding:16px 0;
+  background:var(--panel);
+  backdrop-filter:saturate(140%) blur(6px);
+  border:1px solid var(--stroke);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:18px 0;
 }
-.sb-title{padding:0 18px 6px; color:var(--primary); font-weight:700; font-size:.95rem; letter-spacing:.6px}
+.sb-title{
+  padding:0 18px 6px;
+  color:var(--primary);
+  font-weight:700;
+  font-size:.95rem;
+  letter-spacing:.6px;
+}
 .sb-group{margin-top:14px}
 .sb-group .title{
-  padding:10px 18px; font-weight:700; color:var(--primary); text-transform:uppercase;
-  font-size:.8rem; letter-spacing:.8px;
+  padding:10px 18px;
+  font-weight:700;
+  color:var(--primary);
+  text-transform:uppercase;
+  font-size:.8rem;
+  letter-spacing:.8px;
 }
 .nav{
-  display:flex; flex-direction:column; gap:4px; padding:4px 8px 10px;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  padding:4px 8px 10px;
 }
 .nav a{
-  display:flex; align-items:center; gap:10px;
-  padding:10px 12px; margin:0 8px; border-radius:10px; color:#0f1b2d; text-decoration:none;
-  transition:.15s; font-weight:500;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  margin:0 8px;
+  border-radius:10px;
+  color:#0f1b2d;
+  text-decoration:none;
+  transition:.15s;
+  font-weight:500;
 }
-.nav a i{width:18px; text-align:center; opacity:.9}
-.nav a:hover{background:#eaf3ff; color:var(--primary)}
-.nav .empty{opacity:.6; padding:6px 18px}
+.nav a:hover{
+  background:#eaf3ff;
+  color:var(--primary);
+}
+.nav .empty{
+  opacity:.6;
+  padding:6px 18px;
+}
 
-/* ====== MAIN ====== */
+/* ===== MAIN ===== */
 .main{
-  display:flex; flex-direction:column; gap:18px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
 }
 .welcome{
-  background:var(--panel); border:1px solid var(--stroke); border-radius:18px; box-shadow:var(--shadow);
-  padding:20px 22px;
+  background:var(--panel);
+  border:1px solid var(--stroke);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:18px 22px;
 }
 .kpis{
-  display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
 }
 .card{
-  background:#fff; border:1px solid var(--stroke); border-radius:16px; padding:18px;
-  box-shadow:var(--shadow); transition:.2s;
+  background:#fff;
+  border:1px solid var(--stroke);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  transition:.2s;
+  overflow:hidden;
+  text-align:center;
 }
-.card:hover{transform:translateY(-2px)}
-.card h3{margin:8px 0 6px; color:var(--primary); font-size:1rem}
-.card p{margin:0; color:#445063; font-size:.95rem}
+.card:hover{transform:translateY(-3px)}
+.card img{
+  width:100%;
+  height:130px;
+  object-fit:cover;
+  border-bottom:1px solid var(--stroke);
+}
+.card h3{
+  margin:12px 0 6px;
+  color:var(--primary);
+  font-size:1.05rem;
+}
+.card p{
+  margin:0 0 14px;
+  color:#445063;
+  font-size:.95rem;
+}
 
-/* ====== FORM ====== */
+/* ===== FORM ===== */
 .panel{
-  background:#fff; border:1px solid var(--stroke); border-radius:16px; box-shadow:var(--shadow);
-  padding:18px; max-width:520px;
+  background:#fff;
+  border:1px solid var(--stroke);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  padding:20px;
+  max-width:520px;
 }
-.form-grid{display:grid; gap:10px}
 .input, .select{
-  width:100%; padding:12px 12px; border:1px solid #cfe0f4; border-radius:10px; background:#f7fbff;
-  outline:none; font-size:.95rem; transition:.15s;
+  width:100%;
+  padding:10px 12px;
+  border:1px solid #cfe0f4;
+  border-radius:10px;
+  background:#f7fbff;
+  outline:none;
+  font-size:.95rem;
+  transition:.15s;
 }
-.input:focus, .select:focus{border-color:#9cc3ef; background:#fff; box-shadow:0 0 0 3px #cfe6ff}
-.form-actions{display:flex; gap:8px; margin-top:6px}
-.btn-primary{background:var(--primary); color:#fff}
-.btn-primary:hover{background:var(--primary-dark)}
-.msg{font-weight:600; margin-top:6px; font-size:.9rem}
+.input:focus, .select:focus{
+  border-color:#9cc3ef;
+  background:#fff;
+  box-shadow:0 0 0 3px #cfe6ff;
+}
+.btn-primary{
+  background:var(--primary);
+  color:#fff;
+}
+.btn-primary:hover{
+  background:var(--primary-dark);
+}
+.msg{
+  font-weight:600;
+  margin-top:6px;
+  font-size:.9rem;
+}
 
-/* ====== FOOTER ====== */
-.footer{padding:22px 0 34px; text-align:center; color:#5a6a85; font-size:.9rem}
-@media (max-width:1024px){ .shell{grid-template-columns:1fr} .kpis{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:560px){ .kpis{grid-template-columns:1fr} .brand h1{display:none} }
+/* ===== FOOTER ===== */
+.footer{
+  padding:22px 0 34px;
+  text-align:center;
+  color:#5a6a85;
+  font-size:.9rem;
+}
+
+@media (max-width:1024px){
+  .shell{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
-
-<!-- LOGIN OVERLAY -->
-<div id="loginOverlay" style="display:none;">
-  <div class="panel" style="max-width:380px; text-align:center;">
-    <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo" style="height:110px; margin-bottom:6px;">
-    <h2 style="margin:6px 0 14px; color:var(--primary)">Admininloggning</h2>
-    <div class="form-grid">
-      <input class="input" type="text" id="username" placeholder="Användarnamn">
-      <input class="input" type="password" id="password" placeholder="Lösenord">
-      <button class="btn btn-primary" onclick="checkLogin()">Logga in</button>
-      <div class="msg" id="errorMsg" style="color:#d22; display:none;">Fel användarnamn eller lösenord</div>
-    </div>
-  </div>
-</div>
 
 <!-- HEADER -->
 <div class="header">
   <div class="header-inner">
     <div class="brand" id="logoLink">
-      <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo logo">
+      <img src="images/black_fyndbologo.png" alt="FyndBo logo">
       <h1>Adminpanel</h1>
     </div>
     <button class="btn btn-ghost" onclick="logout()">Logga ut</button>
   </div>
 </div>
 
-<!-- CONTENT -->
+<!-- PAGE -->
 <div class="shell" id="adminPanel" style="display:none;">
 
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="sb-title">Navigation</div>
 
     <div class="sb-group">
       <div class="title"><i class="fa-regular fa-folder-open"></i> Sidor</div>
-      <nav id="nav-sidor" class="nav">
-        <div class="empty">Laddar...</div>
-      </nav>
+      <nav id="nav-sidor" class="nav"><div class="empty">Laddar...</div></nav>
     </div>
 
     <div class="sb-group">
       <div class="title"><i class="fa-solid fa-gear"></i> Hantering</div>
-      <nav id="nav-hantering" class="nav">
-        <div class="empty">Laddar...</div>
-      </nav>
+      <nav id="nav-hantering" class="nav"><div class="empty">Laddar...</div></nav>
     </div>
 
     <div class="sb-group">
       <div class="title"><i class="fa-solid fa-envelope"></i> Meddelanden</div>
-      <nav id="nav-medd" class="nav">
-        <div class="empty">Laddar...</div>
-      </nav>
+      <nav id="nav-medd" class="nav"><div class="empty">Laddar...</div></nav>
     </div>
   </aside>
 
-  <!-- MAIN -->
   <main class="main">
     <section class="welcome">
-      <h2 style="margin:0 0 6px; color:var(--primary)">Välkommen till FyndBos Adminpanel</h2>
+      <h2 style="margin:0;color:var(--primary)">Välkommen till FyndBos Adminpanel</h2>
       <div id="statusMsg" style="color:#4b5563">Ansluter till databasen…</div>
     </section>
 
     <section class="kpis">
       <div class="card">
-        <i class="fa-solid fa-house"></i>
+        <img src="images/bostader.jpg" alt="Bostäder">
         <h3>Hantera bostäder</h3>
         <p>Lägg till, redigera eller ta bort bostadsannonser.</p>
       </div>
       <div class="card">
-        <i class="fa-solid fa-users"></i>
+        <img src="images/anvandare.jpg" alt="Användare">
         <h3>Användare</h3>
         <p>Se registrerade användare och administratörer.</p>
       </div>
       <div class="card">
-        <i class="fa-solid fa-chart-line"></i>
+        <img src="images/statistik.jpg" alt="Statistik">
         <h3>Statistik</h3>
         <p>Visa sidvisningar och popularitet.</p>
       </div>
       <div class="card">
-        <i class="fa-solid fa-plus"></i>
+        <img src="images/nyttobjekt.jpg" alt="Nytt objekt">
         <h3>Lägg till nytt objekt</h3>
         <p>Publicera nya annonser.</p>
       </div>
     </section>
 
     <section class="panel">
-      <h3 style="margin:0 0 10px; color:var(--primary)">Lägg till ny sida</h3>
+      <h3 style="margin:0 0 10px;color:var(--primary)">Lägg till ny sida</h3>
       <form id="addPageForm">
-        <div class="form-grid">
-          <input class="input" type="text" id="newPageName" placeholder="Sidnamn (t.ex. Kontakt)" required>
-          <input class="input" type="text" id="newPageUrl" placeholder="URL (t.ex. kontakt.html)" required>
-          <select class="select" id="newPageCategory" required>
-            <option value="">Välj kategori…</option>
-            <option value="sidor">Sidor</option>
-            <option value="hantering">Hantering</option>
-            <option value="meddelanden">Meddelanden</option>
-          </select>
-        </div>
-        <div class="form-actions">
-          <button type="submit" class="btn btn-primary">Lägg till sida</button>
-        </div>
+        <input class="input" type="text" id="newPageName" placeholder="Sidnamn (t.ex. Kontakt)" required>
+        <input class="input" type="text" id="newPageUrl" placeholder="URL (t.ex. kontakt.html)" required>
+        <select class="select" id="newPageCategory" required>
+          <option value="">Välj kategori…</option>
+          <option value="sidor">Sidor</option>
+          <option value="hantering">Hantering</option>
+          <option value="meddelanden">Meddelanden</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Lägg till sida</button>
         <div id="addPageMsg" class="msg"></div>
       </form>
     </section>
@@ -221,132 +319,64 @@ body{
 
 <div class="footer">© 2025 FyndBo – Adminpanel</div>
 
-<!-- === SUPABASE & APP LOGIK === -->
+<!-- Supabase Script -->
 <script type="module">
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
 const supabase = createClient(
   "https://ymqwoiuhummwrtzfhbgm.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InltcXdvaXVodW1td3J0emZoYmdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzMDYzOTAsImV4cCI6MjA3Njg4MjM5MH0.9s0iaJm_RGJxZFyPZqQyZvPCeCz60Q6P8EsPxfSO2AI"
 );
-
-const navSidor = document.getElementById("nav-sidor");
-const navHan = document.getElementById("nav-hantering");
-const navMedd = document.getElementById("nav-medd");
-const statusMsg = document.getElementById("statusMsg");
-
-// Ladda och rendera navigationen – HELT DYNAMISKT efter kategori
+const navSidor=document.getElementById("nav-sidor"),
+navHan=document.getElementById("nav-hantering"),
+navMedd=document.getElementById("nav-medd"),
+statusMsg=document.getElementById("statusMsg");
 async function loadPages(){
-  const { data, error } = await supabase
-    .from("pages")
-    .select("*")
-    .order("name", { ascending: true });
-
-  if(error){
-    console.error(error);
-    statusMsg.textContent = "❌ Fel vid anslutning till databasen.";
-    [navSidor, navHan, navMedd].forEach(el => el.innerHTML = `<div class="empty">Kunde inte hämta.</div>`);
-    return;
-  }
-
-  statusMsg.textContent = "✅ Sidor hämtade från databasen!";
-
-  // töm
-  navSidor.innerHTML = ""; navHan.innerHTML = ""; navMedd.innerHTML = "";
-
-  // DÖLJ adminpanel-länk i listan (blir konstigt att länka till sig själv)
-  const cleaned = (data || []).filter(p => (p.url||"").toLowerCase() !== "adminpanel.html");
-
-  // Backwards-compat: om någon post har 'publik' → behandla som 'sidor'
-  cleaned.forEach(p => { if(p.category === "publik") p.category = "sidor"; });
-
-  // Skapa item-funktion
-  const item = (p) => {
-    const icon = p.category === "hantering" ? "fa-gear"
-               : p.category === "meddelanden" ? "fa-envelope"
-               : "fa-file";
-    return `<a href="${p.url}" target="_blank" rel="noopener">
-              <i class="fa-solid ${icon}"></i><span>${p.name}</span>
-            </a>`;
-  };
-
-  // Rendera per kategori
-  const sidor = cleaned.filter(p => p.category === "sidor");
-  const han   = cleaned.filter(p => p.category === "hantering");
-  const medd  = cleaned.filter(p => p.category === "meddelanden");
-
-  navSidor.innerHTML = sidor.length ? sidor.map(item).join("") : `<div class="empty">Inga sidor ännu.</div>`;
-  navHan.innerHTML   = han.length   ? han.map(item).join("")   : `<div class="empty">Inga länkar ännu.</div>`;
-  navMedd.innerHTML  = medd.length  ? medd.map(item).join("")  : `<div class="empty">Inga länkar ännu.</div>`;
+  const {data,error}=await supabase.from("pages").select("*").order("name",{ascending:true});
+  if(error){statusMsg.textContent="❌ Fel vid anslutning.";return;}
+  const cleaned=(data||[]).filter(p=>(p.url||"").toLowerCase()!=="adminpanel.html");
+  cleaned.forEach(p=>{if(p.category==="publik")p.category="sidor"});
+  const item=(p)=>`<a href="${p.url}" target="_blank"><i class="fa-solid fa-file"></i>${p.name}</a>`;
+  const group=(list,el)=>{el.innerHTML=list.length?list.map(item).join(""):`<div class="empty">Inga sidor.</div>`;}
+  group(cleaned.filter(p=>p.category==="sidor"),navSidor);
+  group(cleaned.filter(p=>p.category==="hantering"),navHan);
+  group(cleaned.filter(p=>p.category==="meddelanden"),navMedd);
+  statusMsg.textContent="✅ Sidor hämtade från databasen!";
 }
-
-document.addEventListener("DOMContentLoaded", loadPages);
-
-// Form: lägg till ny sida
-const form = document.getElementById("addPageForm");
-form.addEventListener("submit", async (e)=>{
+document.addEventListener("DOMContentLoaded",loadPages);
+document.getElementById("addPageForm").addEventListener("submit",async e=>{
   e.preventDefault();
-  const name = document.getElementById("newPageName").value.trim();
-  const url = document.getElementById("newPageUrl").value.trim();
-  const category = document.getElementById("newPageCategory").value.trim();
-  const msg = document.getElementById("addPageMsg");
-
-  if(!name || !url || !category){
-    msg.textContent = "⚠️ Fyll i alla fält.";
-    msg.style.color = "#c62828";
-    return;
-  }
-
-  const { error } = await supabase.from("pages").insert([{ name, url, category }]);
-  if(error){
-    console.error(error);
-    msg.textContent = "❌ Kunde inte lägga till sidan.";
-    msg.style.color = "#c62828";
-  }else{
-    msg.textContent = "✅ Sidan lades till!";
-    msg.style.color = "#1b5e20";
-    form.reset();
-    loadPages();
-  }
+  const name=document.getElementById("newPageName").value.trim();
+  const url=document.getElementById("newPageUrl").value.trim();
+  const category=document.getElementById("newPageCategory").value.trim();
+  const msg=document.getElementById("addPageMsg");
+  if(!name||!url||!category){msg.textContent="⚠️ Fyll i alla fält.";msg.style.color="#c62828";return;}
+  const {error}=await supabase.from("pages").insert([{name,url,category}]);
+  if(error){msg.textContent="❌ Kunde inte lägga till.";msg.style.color="#c62828";}
+  else{msg.textContent="✅ Sidan lades till!";msg.style.color="#1b5e20";e.target.reset();loadPages();}
 });
 </script>
 
-<!-- === LOGIN/LOGGA UT & LOGO-LÄNK === -->
+<!-- Login Script -->
 <script>
-const _u = atob("RnluZGJvLUFkbWlu");
-const _p = atob("RnluZEJvLTE=");
-
+const _u=atob("RnluZGJvLUFkbWlu"),_p=atob("RnluZEJvLTE=");
 function checkLogin(){
-  const u = document.getElementById("username").value.trim();
-  const p = document.getElementById("password").value.trim();
-  const e = document.getElementById("errorMsg");
-  if(u===_u && p===_p){
+  const u=document.getElementById("username").value.trim(),
+  p=document.getElementById("password").value.trim(),
+  e=document.getElementById("errorMsg");
+  if(u===_u&&p===_p){
     document.getElementById("loginOverlay").style.display="none";
     document.getElementById("adminPanel").style.display="grid";
     localStorage.setItem("loggedIn","true");
-  }else{
-    e.style.display="block";
-  }
+  }else e.style.display="block";
 }
-
 if(localStorage.getItem("loggedIn")==="true"){
-  document.getElementById("loginOverlay").style.display="none";
   document.getElementById("adminPanel").style.display="grid";
-}else{
-  document.getElementById("loginOverlay").style.display="flex";
 }
-
 function logout(){
   localStorage.removeItem("loggedIn");
-  document.getElementById("adminPanel").style.display="none";
-  document.getElementById("loginOverlay").style.display="flex";
+  location.reload();
 }
-
-// Klick på loggan → till under-konstruktion/startsida
-document.getElementById("logoLink").addEventListener("click", ()=>{
-  window.location.href = "index.html";
-});
+document.getElementById("logoLink").addEventListener("click",()=>{window.location.href="index.html";});
 </script>
-
 </body>
 </html>
