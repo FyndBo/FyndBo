@@ -50,7 +50,7 @@ body{
   cursor:pointer;
 }
 .brand img{
-  height:100px; /* större logga */
+  height:100px;
   transition:.2s;
   filter:drop-shadow(0 4px 10px rgba(0,0,0,.25));
 }
@@ -94,11 +94,10 @@ body{
 /* SIDEBAR */
 .sidebar{
   background:var(--panel);
-  backdrop-filter:saturate(140%) blur(6px);
   border:1px solid var(--stroke);
   border-radius:18px;
   box-shadow:var(--shadow);
-  padding:18px 0;
+  padding:10px 0;
 }
 .sb-title{
   padding:0 18px 6px;
@@ -107,21 +106,28 @@ body{
   font-size:.95rem;
   letter-spacing:.6px;
 }
-.sb-group{margin-top:14px}
-.sb-group .title{
+
+/* FALL-TABS (Accordion) */
+.section-header{
   padding:10px 18px;
   font-weight:700;
   color:var(--primary);
   text-transform:uppercase;
   font-size:.8rem;
   letter-spacing:.8px;
+  cursor:pointer;
+  user-select:none;
+  transition:.2s;
 }
+.section-header:hover{background:#f0f6ff;}
+.section-header i{margin-right:8px;}
 .nav{
-  display:flex;
+  display:none;
   flex-direction:column;
   gap:4px;
-  padding:4px 8px 10px;
+  padding:6px 8px 10px;
 }
+.nav.open{display:flex;}
 .nav a{
   display:flex;
   align-items:center;
@@ -157,10 +163,10 @@ body{
   padding:18px 22px;
 }
 
-/* CARDS */
+/* DASHBOARD CARDS */
 .kpis{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
 }
 .card{
@@ -239,7 +245,6 @@ body{
   color:#5a6a85;
   font-size:.9rem;
 }
-
 @media (max-width:1024px){
   .shell{grid-template-columns:1fr}
 }
@@ -263,20 +268,14 @@ body{
   <aside class="sidebar">
     <div class="sb-title">Navigation</div>
 
-    <div class="sb-group">
-      <div class="title"><i class="fa-regular fa-folder-open"></i> Sidor</div>
-      <nav id="nav-sidor" class="nav"><div class="empty">Laddar...</div></nav>
-    </div>
+    <div class="section-header" data-target="nav-sidor"><i class="fa-regular fa-folder-open"></i> Sidor</div>
+    <nav id="nav-sidor" class="nav"><div class="empty">Laddar...</div></nav>
 
-    <div class="sb-group">
-      <div class="title"><i class="fa-solid fa-gear"></i> Hantering</div>
-      <nav id="nav-hantering" class="nav"><div class="empty">Laddar...</div></nav>
-    </div>
+    <div class="section-header" data-target="nav-hantering"><i class="fa-solid fa-gear"></i> Hantering</div>
+    <nav id="nav-hantering" class="nav"><div class="empty">Laddar...</div></nav>
 
-    <div class="sb-group">
-      <div class="title"><i class="fa-solid fa-envelope"></i> Meddelanden</div>
-      <nav id="nav-medd" class="nav"><div class="empty">Laddar...</div></nav>
-    </div>
+    <div class="section-header" data-target="nav-medd"><i class="fa-solid fa-envelope"></i> Meddelanden</div>
+    <nav id="nav-medd" class="nav"><div class="empty">Laddar...</div></nav>
   </aside>
 
   <main class="main">
@@ -286,26 +285,13 @@ body{
     </section>
 
     <section class="kpis">
-      <a href="bostader.html" class="card">
-        <i class="fa-solid fa-house"></i>
-        <h3>Hantera bostäder</h3>
-        <p>Lägg till, redigera eller ta bort bostäder.</p>
-      </a>
-      <a href="anvandare.html" class="card">
-        <i class="fa-solid fa-users"></i>
-        <h3>Användare</h3>
-        <p>Se registrerade användare och administratörer.</p>
-      </a>
-      <a href="statistik.html" class="card">
-        <i class="fa-solid fa-chart-line"></i>
-        <h3>Statistik</h3>
-        <p>Visa webbplatsdata och sidvisningar.</p>
-      </a>
-      <a href="nyttobjekt.html" class="card">
-        <i class="fa-solid fa-plus"></i>
-        <h3>Lägg till nytt objekt</h3>
-        <p>Publicera en ny annons.</p>
-      </a>
+      <a href="bostader.html" class="card"><i class="fa-solid fa-house"></i><h3>Hantera bostäder</h3><p>Lägg till, redigera eller ta bort bostäder.</p></a>
+      <a href="anvandare.html" class="card"><i class="fa-solid fa-users"></i><h3>Användare</h3><p>Se registrerade användare och administratörer.</p></a>
+      <a href="statistik.html" class="card"><i class="fa-solid fa-chart-line"></i><h3>Statistik</h3><p>Visa webbplatsdata och sidvisningar.</p></a>
+      <a href="nyttobjekt.html" class="card"><i class="fa-solid fa-plus"></i><h3>Lägg till nytt objekt</h3><p>Publicera en ny annons.</p></a>
+      <a href="inkorg.html" class="card"><i class="fa-solid fa-inbox"></i><h3>Inkorg</h3><p>Se inkommande meddelanden.</p></a>
+      <a href="kontakt.html" class="card"><i class="fa-solid fa-address-book"></i><h3>Kontakt</h3><p>Redigera kontaktinformation.</p></a>
+      <a href="startsida.html" class="card"><i class="fa-solid fa-globe"></i><h3>Startsida</h3><p>Hantera startsidans innehåll.</p></a>
     </section>
 
     <section class="panel">
@@ -331,7 +317,7 @@ body{
 <!-- Supabase Script -->
 <script type="module">
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-const supabase = createClient(
+const supabase=createClient(
   "https://ymqwoiuhummwrtzfhbgm.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InltcXdvaXVodW1td3J0emZoYmdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzMDYzOTAsImV4cCI6MjA3Njg4MjM5MH0.9s0iaJm_RGJxZFyPZqQyZvPCeCz60Q6P8EsPxfSO2AI"
 );
@@ -343,7 +329,6 @@ async function loadPages(){
   const {data,error}=await supabase.from("pages").select("*").order("name",{ascending:true});
   if(error){statusMsg.textContent="❌ Fel vid anslutning.";return;}
   const cleaned=(data||[]).filter(p=>(p.url||"").toLowerCase()!=="adminpanel.html");
-  cleaned.forEach(p=>{if(p.category==="publik")p.category="sidor"});
   const item=(p)=>`<a href="${p.url}" target="_blank"><i class="fa-solid fa-file"></i>${p.name}</a>`;
   const group=(list,el)=>{el.innerHTML=list.length?list.map(item).join(""):`<div class="empty">Inga sidor.</div>`;}
   group(cleaned.filter(p=>p.category==="sidor"),navSidor);
@@ -354,10 +339,10 @@ async function loadPages(){
 document.addEventListener("DOMContentLoaded",loadPages);
 document.getElementById("addPageForm").addEventListener("submit",async e=>{
   e.preventDefault();
-  const name=document.getElementById("newPageName").value.trim();
-  const url=document.getElementById("newPageUrl").value.trim();
-  const category=document.getElementById("newPageCategory").value.trim();
-  const msg=document.getElementById("addPageMsg");
+  const name=document.getElementById("newPageName").value.trim(),
+  url=document.getElementById("newPageUrl").value.trim(),
+  category=document.getElementById("newPageCategory").value.trim(),
+  msg=document.getElementById("addPageMsg");
   if(!name||!url||!category){msg.textContent="⚠️ Fyll i alla fält.";msg.style.color="#c62828";return;}
   const {error}=await supabase.from("pages").insert([{name,url,category}]);
   if(error){msg.textContent="❌ Kunde inte lägga till.";msg.style.color="#c62828";}
@@ -365,16 +350,22 @@ document.getElementById("addPageForm").addEventListener("submit",async e=>{
 });
 </script>
 
-<!-- Login Script -->
+<!-- Accordion Script -->
 <script>
-const _u=atob("RnluZGJvLUFkbWlu"),_p=atob("RnluZEJvLTE=");
+document.querySelectorAll(".section-header").forEach(header=>{
+  header.addEventListener("click",()=>{
+    const target=document.getElementById(header.dataset.target);
+    target.classList.toggle("open");
+  });
+});
+</script>
+
+<!-- Login -->
+<script>
 if(localStorage.getItem("loggedIn")==="true"){
   document.getElementById("adminPanel").style.display="grid";
 }
-function logout(){
-  localStorage.removeItem("loggedIn");
-  location.reload();
-}
+function logout(){localStorage.removeItem("loggedIn");location.reload();}
 document.getElementById("logoLink").addEventListener("click",()=>{window.location.href="index.html";});
 </script>
 </body>
