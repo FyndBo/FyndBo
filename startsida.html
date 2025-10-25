@@ -1,243 +1,274 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FyndBo | Hitta ditt drömhem</title>
-  <link rel="icon" href="images/FyndBo-blue-removebg-preview.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FyndBo | Hitta ditt drömhem</title>
+<link rel="icon" href="images/FyndBo-blue-removebg-preview.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <style>
-    body { font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+<style>
+html { color-scheme: light; }
+body { font-family: 'Poppins', sans-serif; overflow-x: hidden; background-color: #f5f8fb; }
 
-    /* HEADER */
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 50;
-      background-color: rgba(0, 20, 50, 0.7);
-      backdrop-filter: blur(8px);
-      transition: transform 0.4s ease, opacity 0.3s ease;
-      height: 70px; /* mindre headerhöjd */
-      display: flex;
-      align-items: center;
-    }
+/* --- HEADER --- */
+header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  height: 70px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+header.hidden-header { transform: translateY(-100%); opacity: 0; }
+header.visible-header { transform: translateY(0); opacity: 1; }
+nav a { transition: color 0.3s ease; }
+nav a:hover { color: #0f4c81; }
 
-    header.hidden-header {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
+/* --- HERO SECTION --- */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('images/Unsplash-img-cityoverpicture.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.6);
+  transform: scale(1.05);
+  animation: zoom 30s ease-in-out infinite alternate;
+}
+@keyframes zoom { from{transform:scale(1.05);} to{transform:scale(1.15);} }
 
-    header.visible-header {
-      transform: translateY(0);
-      opacity: 1;
-    }
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,50,0.1), rgba(0,0,50,0.8));
+}
 
-    /* HERO SECTION */
-    .hero {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      overflow: hidden;
-      text-align: center;
-    }
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 850px;
+  padding: 0 20px;
+  animation: fadeInUp 1.4s ease-out;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: url('images/Unsplash-img-cityoverpicture.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      transform: scale(1.05);
-      filter: brightness(0.65);
-      z-index: 0;
-      animation: zoomIn 30s ease-in-out infinite alternate;
-    }
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+@media(min-width:768px){ .hero h1{font-size:4.5rem;} }
 
-    @keyframes zoomIn {
-      from { transform: scale(1.05); }
-      to { transform: scale(1.15); }
-    }
+.hero p {
+  font-size: 1.2rem;
+  color: #e2e8f0;
+  margin-bottom: 40px;
+}
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(0, 20, 50, 0.1), rgba(0, 20, 50, 0.8));
-      z-index: 1;
-    }
+.hero .btn {
+  background: white;
+  color: #0f4c81;
+  padding: 15px 35px;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.hero .btn:hover {
+  background: #f1f5f9;
+  transform: translateY(-3px);
+}
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      animation: fadeInUp 1.5s ease-out;
-    }
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.9);
+  font-size: 1.6rem;
+  animation: bounce 1.8s infinite;
+  z-index: 3;
+}
+@keyframes bounce {
+  0%,20%,50%,80%,100% {transform: translate(-50%,0);}
+  40% {transform: translate(-50%,-10px);}
+  60% {transform: translate(-50%,-5px);}
+}
 
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(40px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
+/* --- CONTENT SECTIONS --- */
+section { scroll-margin-top: 80px; }
+.fade-section { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+.fade-section.visible { opacity: 1; transform: translateY(0); }
 
-    .scroll-indicator {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: rgba(255,255,255,0.8);
-      font-size: 1.5rem;
-      animation: bounce 1.8s infinite;
-      z-index: 3;
-    }
+/* --- CARDS --- */
+.card {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.08);
+  transition: all 0.3s ease;
+}
+.card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,.15); }
 
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {transform: translate(-50%, 0);}
-      40% {transform: translate(-50%, -10px);}
-      60% {transform: translate(-50%, -5px);}
-    }
-  </style>
+/* --- FOOTER --- */
+footer {
+  background: #0f4c81;
+  color: white;
+}
+footer a:hover { color: #fff; }
+</style>
 </head>
 
-<body class="bg-white text-gray-900">
+<body>
 
-  <!-- HEADER -->
-  <header id="mainHeader" class="visible-header">
-    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between w-full">
-      <div class="flex items-center gap-3">
-        <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo" class="h-20 md:h-24 drop-shadow-2xl">
-      </div>
-      <nav class="hidden md:flex items-center gap-10 text-white/90 font-semibold text-lg">
-        <a href="#" class="hover:text-white transition">Hem</a>
-        <a href="#" class="hover:text-white transition">Om oss</a>
-        <a href="#" class="hover:text-white transition">Kontakt</a>
-      </nav>
-      <a href="#" class="px-6 py-2 rounded-full bg-white text-blue-800 text-lg font-semibold hover:bg-blue-100 transition">Logga in</a>
+<!-- HEADER -->
+<header id="mainHeader" class="visible-header">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between w-full">
+    <div class="flex items-center gap-3 cursor-pointer" onclick="location.href='startsida.html'">
+      <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo" class="h-14 md:h-16 drop-shadow-lg">
     </div>
-  </header>
+    <nav class="hidden md:flex items-center gap-10 text-gray-800 font-semibold text-lg">
+      <a href="#hem">Hem</a>
+      <a href="fyndbo.se-läs_mer.html">Om oss</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a href="login.html" class="px-6 py-2 rounded-full bg-[#0f4c81] text-white text-lg font-semibold hover:bg-[#073a5a] transition">Logga in</a>
+  </div>
+</header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content px-6 max-w-3xl">
-      <h1 class="text-5xl md:text-7xl font-extrabold drop-shadow-2xl leading-tight mb-6">
-        Hitta ditt nästa drömhem
-      </h1>
-      <p class="mt-2 text-lg md:text-xl text-blue-100 max-w-2xl mx-auto">
-        Utforska Sverige med modern bostadsteknik – tryggt, smart och enkelt.
+<!-- HERO -->
+<section id="hem" class="hero">
+  <div class="hero-content">
+    <h1>Hitta ditt nästa drömhem</h1>
+    <p>Upplev en ny nivå av bostadssök – byggd med trygghet, enkelhet och teknik i världsklass.</p>
+    <a href="Bostader.html" class="btn">Utforska bostäder</a>
+  </div>
+  <div class="scroll-indicator"><i class="fa-solid fa-chevron-down"></i></div>
+</section>
+
+<!-- FYNDBO-FÖRDELAR -->
+<section class="py-20 text-center fade-section">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-[#0f4c81] mb-10">Varför välja FyndBo?</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="card">
+        <i class="fa-solid fa-brain text-4xl text-[#0f4c81] mb-4"></i>
+        <h3 class="font-semibold text-xl text-[#0f4c81] mb-2">AI och smart teknik</h3>
+        <p>Få rekommendationer som verkligen matchar dig – tack vare AI som lär känna dina preferenser.</p>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-handshake text-4xl text-[#0f4c81] mb-4"></i>
+        <h3 class="font-semibold text-xl text-[#0f4c81] mb-2">Tryggt och transparent</h3>
+        <p>Alla säljare verifieras, och alla steg i processen är byggda med din säkerhet i fokus.</p>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-chart-column text-4xl text-[#0f4c81] mb-4"></i>
+        <h3 class="font-semibold text-xl text-[#0f4c81] mb-2">Insikter i realtid</h3>
+        <p>Följ bostadsmarknaden live – med statistik, trender och analyser direkt i portalen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATISTIK -->
+<section class="py-20 bg-gradient-to-b from-white to-blue-50 text-center fade-section">
+  <h2 class="text-3xl md:text-4xl font-extrabold text-[#0f4c81] mb-10">Sveriges bostadsmarknad just nu</h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+    <div><p class="text-5xl font-extrabold text-[#0f4c81]">14 532</p><p class="text-gray-600">Aktiva annonser</p></div>
+    <div><p class="text-5xl font-extrabold text-[#0f4c81]">4.1 Mkr</p><p class="text-gray-600">Snittpris villa</p></div>
+    <div><p class="text-5xl font-extrabold text-[#0f4c81]">28</p><p class="text-gray-600">Nya bostäder / dag</p></div>
+    <div><p class="text-5xl font-extrabold text-[#0f4c81]">98%</p><p class="text-gray-600">Nöjda användare</p></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="kontakt">
+  <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-4 gap-10">
+    <div>
+      <img src="images/FyndBo-blue-removebg-preview.png" class="h-28 mb-4" alt="FyndBo">
+      <p class="text-blue-100 text-lg leading-relaxed">
+        Din plattform för att hitta och sälja bostäder – framtidens bostadsmarknad, idag.
       </p>
-      <div class="mt-10">
-        <a href="Bostader.html" class="px-10 py-4 rounded-full bg-white text-blue-800 font-semibold text-lg hover:bg-blue-100 shadow-xl transition transform hover:scale-105">
-          Hitta din bostad nu!
-        </a>
+    </div>
+    <div>
+      <h4 class="font-bold text-lg mb-3">Länkar</h4>
+      <ul class="space-y-2 text-blue-100">
+        <li><a href="#hem" class="hover:text-white">Hem</a></li>
+        <li><a href="fyndbo.se-läs_mer.html" class="hover:text-white">Om oss</a></li>
+        <li><a href="#kontakt" class="hover:text-white">Kontakt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-bold text-lg mb-3">Kontakt</h4>
+      <p class="text-blue-100">info@fyndbo.se<br>08–123 45 67<br>Stockholm, Sverige</p>
+    </div>
+    <div>
+      <h4 class="font-bold text-lg mb-3">Nyhetsbrev</h4>
+      <p class="text-blue-100 mb-3">Prenumerera och få nyheter först.</p>
+      <div class="flex">
+        <input type="email" placeholder="Din e-post" class="px-3 py-2 rounded-l bg-white text-gray-800 w-full focus:outline-none">
+        <button class="bg-[#073a5a] px-4 py-2 rounded-r hover:bg-[#0f4c81] transition">OK</button>
       </div>
     </div>
-    <div class="scroll-indicator">
-      <i class="fa-solid fa-chevron-down"></i>
-    </div>
-  </section>
+  </div>
+  <div class="border-t border-blue-900 py-6 text-center text-sm text-blue-200">
+    © 2025 FyndBo. Alla rättigheter förbehållna.
+  </div>
+</footer>
 
-  <!-- STATISTIK -->
-  <section class="py-16 bg-gradient-to-b from-white to-blue-50 text-center">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-8">Sveriges bostadsmarknad i siffror</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
-      <div><p class="text-5xl font-extrabold text-blue-700">14 532</p><p class="text-gray-600">Aktiva annonser</p></div>
-      <div><p class="text-5xl font-extrabold text-blue-700">4.1 Mkr</p><p class="text-gray-600">Snittpris villa</p></div>
-      <div><p class="text-5xl font-extrabold text-blue-700">28</p><p class="text-gray-600">Nya bostäder / dag</p></div>
-      <div><p class="text-5xl font-extrabold text-blue-700">98%</p><p class="text-gray-600">Nöjda användare</p></div>
-    </div>
-  </section>
+<script>
+// Scroll header hide/show
+let lastScroll = 0;
+const header = document.getElementById('mainHeader');
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset;
+  if (currentScroll <= 0) {
+    header.classList.remove('hidden-header');
+    header.classList.add('visible-header');
+    return;
+  }
+  if (currentScroll > lastScroll) {
+    header.classList.add('hidden-header');
+    header.classList.remove('visible-header');
+  } else {
+    header.classList.remove('hidden-header');
+    header.classList.add('visible-header');
+  }
+  lastScroll = currentScroll;
+});
 
-  <!-- OM FYNDBO -->
-  <section class="py-20 bg-white text-center">
-    <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-6">Varför välja FyndBo?</h2>
-      <p class="text-gray-700 text-lg leading-relaxed mb-10 max-w-3xl mx-auto">
-        FyndBo är mer än bara en bostadsportal – det är din digitala väg till ett tryggt och enkelt bostadsköp.  
-        Vi kombinerar modern teknik med personlig känsla och svensk precision.
-      </p>
-      <div class="grid md:grid-cols-3 gap-8 text-left">
-        <div class="p-6 bg-blue-50 rounded-2xl shadow-md hover:shadow-xl transition">
-          <i class="fa-solid fa-house-chimney text-4xl text-blue-700 mb-3"></i>
-          <h3 class="font-semibold text-xl text-blue-900 mb-2">Smarta lösningar</h3>
-          <p class="text-gray-700">Intelligent sök, AI-rekommendationer och marknadsdata i realtid.</p>
-        </div>
-        <div class="p-6 bg-blue-50 rounded-2xl shadow-md hover:shadow-xl transition">
-          <i class="fa-solid fa-shield-halved text-4xl text-blue-700 mb-3"></i>
-          <h3 class="font-semibold text-xl text-blue-900 mb-2">Trygghet i fokus</h3>
-          <p class="text-gray-700">Verifierade säljare och säkra processer i varje steg.</p>
-        </div>
-        <div class="p-6 bg-blue-50 rounded-2xl shadow-md hover:shadow-xl transition">
-          <i class="fa-solid fa-star text-4xl text-blue-700 mb-3"></i>
-          <h3 class="font-semibold text-xl text-blue-900 mb-2">Premiumdesign</h3>
-          <p class="text-gray-700">En exklusiv och ren design som inger förtroende och stil.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="bg-blue-950 text-white">
-    <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-4 gap-10">
-      <div>
-        <img src="images/FyndBo-blue-removebg-preview.png" class="h-32 mb-5" alt="FyndBo">
-        <p class="text-blue-200 text-lg leading-relaxed">
-          Din plattform för att hitta och sälja bostäder – framtidens bostadsmarknad, idag.
-        </p>
-      </div>
-      <div>
-        <h4 class="font-bold text-lg mb-3">Länkar</h4>
-        <ul class="space-y-2 text-blue-200">
-          <li><a href="#" class="hover:text-white">Hem</a></li>
-          <li><a href="#" class="hover:text-white">Om oss</a></li>
-          <li><a href="#" class="hover:text-white">Kontakt</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-bold text-lg mb-3">Kontakt</h4>
-        <p class="text-blue-200">info@fyndbo.se<br>08–123 45 67<br>Stockholm, Sverige</p>
-      </div>
-      <div>
-        <h4 class="font-bold text-lg mb-3">Nyhetsbrev</h4>
-        <p class="text-blue-200 mb-3">Prenumerera och få nyheter först.</p>
-        <div class="flex">
-          <input type="email" placeholder="Din e-post" class="px-3 py-2 rounded-l bg-white text-gray-800 w-full focus:outline-none">
-          <button class="bg-blue-700 px-4 py-2 rounded-r hover:bg-blue-600">OK</button>
-        </div>
-      </div>
-    </div>
-    <div class="border-t border-blue-800 py-6 text-center text-sm text-blue-300">
-      © 2025 FyndBo. Alla rättigheter förbehållna.
-    </div>
-  </footer>
-
-  <!-- SCROLL BEHAVIOR -->
-  <script>
-    let lastScroll = 0;
-    const header = document.getElementById('mainHeader');
-
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
-      if (currentScroll <= 0) {
-        header.classList.remove('hidden-header');
-        header.classList.add('visible-header');
-        return;
-      }
-
-      if (currentScroll > lastScroll) {
-        header.classList.add('hidden-header');
-        header.classList.remove('visible-header');
-      } else {
-        header.classList.remove('hidden-header');
-        header.classList.add('visible-header');
-      }
-      lastScroll = currentScroll;
-    });
-  </script>
-
+// Fade-in on scroll
+const fadeEls = document.querySelectorAll('.fade-section');
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting) entry.target.classList.add('visible');
+  });
+},{threshold:0.15});
+fadeEls.forEach(el=>observer.observe(el));
+</script>
 </body>
 </html>
