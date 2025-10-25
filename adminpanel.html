@@ -6,214 +6,222 @@
 <title>FyndBo Adminpanel</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
-:root {
-  --blue: #1e5fa5;           /* Ljusare blå nyans */
-  --lightblue: #e8f2fb;
-  --bg: #f7f9fc;
-  --white: #ffffff;
-  --shadow: 0 4px 12px rgba(0,0,0,0.08);
+:root{
+  --primary:#1e5fa5;           /* ljusare blå */
+  --primary-dark:#144a85;
+  --bg:#f5f8fc;
+  --panel:#ffffffcc;            /* glassy vit */
+  --stroke:#e6eef7;
+  --shadow:0 10px 30px rgba(0,0,0,.08);
 }
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: var(--bg);
-  color: #1f2937;
-  min-height: 100vh;
-}
-
-/* LOGIN */
-#loginOverlay {
-  position: fixed; inset: 0;
-  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-  display: flex; align-items: center; justify-content: center;
-  z-index: 1000;
-}
-.login-box {
-  background: #fff; padding: 40px 50px; border-radius: 16px;
-  box-shadow: var(--shadow); text-align: center;
-  max-width: 360px; width: 100%;
-}
-.login-box img { width: 100px; margin-bottom: 10px; }
-.login-box h2 { color: var(--blue); margin-bottom: 20px; }
-.login-box input {
-  width: 100%; padding: 12px; margin-bottom: 15px;
-  border: 1px solid #ccc; border-radius: 8px;
-}
-.login-box button {
-  background: var(--blue); color: #fff; border: none; padding: 12px 30px;
-  border-radius: 8px; cursor: pointer; width: 100%; transition: 0.3s;
-}
-.login-box button:hover { background: #114b88; }
-.error { color: red; margin-top: 10px; display: none; }
-
-/* PANEL */
-#adminPanel { display: none; height: 100vh; display: flex; flex-direction: column; }
-header {
-  background: var(--blue); color: #fff; display: flex; align-items: center;
-  justify-content: space-between; padding: 10px 30px; box-shadow: var(--shadow);
-}
-header img { height: 120px; cursor: pointer; transition: 0.3s; }
-header img:hover { transform: scale(1.03); }
-.logout-btn {
-  background: #fff; color: var(--blue); padding: 8px 18px; border-radius: 20px;
-  text-decoration: none; font-weight: 600; transition: 0.3s;
-}
-.logout-btn:hover { background: var(--blue); color: #fff; border: 1px solid #fff; }
-
-.wrapper { display: flex; flex: 1; }
-aside {
-  width: 270px; background: #ffffff; box-shadow: 2px 0 8px rgba(0,0,0,0.05);
-  padding: 25px 0; display: flex; flex-direction: column;
-}
-aside h3 { margin: 0 0 15px 25px; color: var(--blue); font-size: 1.2em; }
-aside section { margin-bottom: 25px; }
-aside .section-title {
-  font-weight: 600;
-  padding: 8px 25px;
-  color: var(--blue);
-  text-transform: uppercase;
-  font-size: 0.9em;
-  letter-spacing: 0.5px;
-}
-aside a {
-  display: block; padding: 8px 40px; color: #333; text-decoration: none;
-  font-size: 0.95em; transition: 0.2s;
-}
-aside a:hover { background: var(--lightblue); color: var(--blue); border-radius: 8px; }
-
-main { flex: 1; padding: 40px; overflow-y: auto; }
-main h1 { color: var(--blue); margin-bottom: 25px; font-size: 1.9em; }
-
-/* Cards */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-.card {
-  background: #fff; border-radius: 12px; padding: 20px;
-  box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s;
-}
-.card:hover { transform: translateY(-5px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
-.card i { font-size: 1.8em; color: var(--blue); margin-bottom: 8px; }
-.card h3 { color: var(--blue); margin: 8px 0; }
-
-footer {
-  text-align: center; padding: 15px; background: var(--lightblue); color: var(--blue);
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:'Poppins',sans-serif; background:var(--bg); color:#0f1b2d;
 }
 
-/* Form */
-#addPageForm {
-  background: #fff; padding: 25px; border-radius: 12px;
-  box-shadow: var(--shadow); margin-top: 40px; max-width: 480px;
+/* ====== HEADER ====== */
+.header{
+  position:sticky; top:0; z-index:50;
+  background:linear-gradient(135deg,#2a6fc1 0%, #1e5fa5 60%, #1b4e88 100%);
+  color:#fff; box-shadow:var(--shadow);
 }
-#addPageForm input, #addPageForm select {
-  width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px;
-  border: 1px solid #ccc;
+.header-inner{
+  max-width:1200px; margin:0 auto; padding:14px 22px;
+  display:flex; align-items:center; justify-content:space-between;
 }
-#addPageForm button {
-  background: var(--blue); color: #fff; border: none; padding: 12px 30px;
-  border-radius: 8px; cursor: pointer; transition: 0.3s;
+.brand{display:flex; align-items:center; gap:14px; cursor:pointer}
+.brand img{height:120px; filter:drop-shadow(0 6px 12px rgba(0,0,0,.25)); transition:.2s}
+.brand img:hover{transform:scale(1.03)}
+.brand h1{margin:0; font-size:1.25rem; font-weight:600; letter-spacing:.3px; opacity:.95}
+.btn{
+  appearance:none; border:0; border-radius:999px; padding:10px 18px;
+  font-weight:600; cursor:pointer; transition:.2s; box-shadow:0 6px 16px rgba(0,0,0,.12);
 }
-#addPageForm button:hover { background: #114b88; }
+.btn-ghost{background:#ffffff; color:var(--primary)}
+.btn-ghost:hover{background:transparent; color:#fff; outline:2px solid #fff}
 
-.status-msg {
-  margin-top: 8px;
-  font-weight: 500;
+/* ====== LAYOUT ====== */
+.shell{max-width:1200px; margin:24px auto; padding:0 22px; display:grid; grid-template-columns:280px 1fr; gap:24px}
+
+/* ====== SIDEBAR ====== */
+.sidebar{
+  background:var(--panel); backdrop-filter:saturate(140%) blur(6px);
+  border:1px solid var(--stroke); border-radius:18px; box-shadow:var(--shadow);
+  padding:16px 0;
 }
+.sb-title{padding:0 18px 6px; color:var(--primary); font-weight:700; font-size:.95rem; letter-spacing:.6px}
+.sb-group{margin-top:14px}
+.sb-group .title{
+  padding:10px 18px; font-weight:700; color:var(--primary); text-transform:uppercase;
+  font-size:.8rem; letter-spacing:.8px;
+}
+.nav{
+  display:flex; flex-direction:column; gap:4px; padding:4px 8px 10px;
+}
+.nav a{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 12px; margin:0 8px; border-radius:10px; color:#0f1b2d; text-decoration:none;
+  transition:.15s; font-weight:500;
+}
+.nav a i{width:18px; text-align:center; opacity:.9}
+.nav a:hover{background:#eaf3ff; color:var(--primary)}
+.nav .empty{opacity:.6; padding:6px 18px}
+
+/* ====== MAIN ====== */
+.main{
+  display:flex; flex-direction:column; gap:18px;
+}
+.welcome{
+  background:var(--panel); border:1px solid var(--stroke); border-radius:18px; box-shadow:var(--shadow);
+  padding:20px 22px;
+}
+.kpis{
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px;
+}
+.card{
+  background:#fff; border:1px solid var(--stroke); border-radius:16px; padding:18px;
+  box-shadow:var(--shadow); transition:.2s;
+}
+.card:hover{transform:translateY(-2px)}
+.card h3{margin:8px 0 6px; color:var(--primary); font-size:1rem}
+.card p{margin:0; color:#445063; font-size:.95rem}
+
+/* ====== FORM ====== */
+.panel{
+  background:#fff; border:1px solid var(--stroke); border-radius:16px; box-shadow:var(--shadow);
+  padding:18px; max-width:520px;
+}
+.form-grid{display:grid; gap:10px}
+.input, .select{
+  width:100%; padding:12px 12px; border:1px solid #cfe0f4; border-radius:10px; background:#f7fbff;
+  outline:none; font-size:.95rem; transition:.15s;
+}
+.input:focus, .select:focus{border-color:#9cc3ef; background:#fff; box-shadow:0 0 0 3px #cfe6ff}
+.form-actions{display:flex; gap:8px; margin-top:6px}
+.btn-primary{background:var(--primary); color:#fff}
+.btn-primary:hover{background:var(--primary-dark)}
+.msg{font-weight:600; margin-top:6px; font-size:.9rem}
+
+/* ====== FOOTER ====== */
+.footer{padding:22px 0 34px; text-align:center; color:#5a6a85; font-size:.9rem}
+@media (max-width:1024px){ .shell{grid-template-columns:1fr} .kpis{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:560px){ .kpis{grid-template-columns:1fr} .brand h1{display:none} }
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="loginOverlay">
-  <div class="login-box">
-    <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo Logo">
-    <h2>Admininloggning</h2>
-    <input type="text" id="username" placeholder="Användarnamn">
-    <input type="password" id="password" placeholder="Lösenord">
-    <button onclick="checkLogin()">Logga in</button>
-    <p class="error" id="errorMsg">Fel användarnamn eller lösenord</p>
+<!-- LOGIN OVERLAY -->
+<div id="loginOverlay" style="display:none;">
+  <div class="panel" style="max-width:380px; text-align:center;">
+    <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo" style="height:110px; margin-bottom:6px;">
+    <h2 style="margin:6px 0 14px; color:var(--primary)">Admininloggning</h2>
+    <div class="form-grid">
+      <input class="input" type="text" id="username" placeholder="Användarnamn">
+      <input class="input" type="password" id="password" placeholder="Lösenord">
+      <button class="btn btn-primary" onclick="checkLogin()">Logga in</button>
+      <div class="msg" id="errorMsg" style="color:#d22; display:none;">Fel användarnamn eller lösenord</div>
+    </div>
   </div>
 </div>
 
-<!-- ADMINPANEL -->
-<div id="adminPanel">
-  <header>
-    <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo Logo" id="logoLink">
-    <a href="#" class="logout-btn" onclick="logout()">Logga ut</a>
-  </header>
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="brand" id="logoLink">
+      <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo logo">
+      <h1>Adminpanel</h1>
+    </div>
+    <button class="btn btn-ghost" onclick="logout()">Logga ut</button>
+  </div>
+</div>
 
-  <div class="wrapper">
-    <aside>
-      <h3>Navigation</h3>
+<!-- CONTENT -->
+<div class="shell" id="adminPanel" style="display:none;">
 
-      <section>
-        <div class="section-title"><i class="fa-solid fa-folder-open"></i> Sidor</div>
-        <div id="pageLinks"><p style="padding-left:40px;">Laddar sidor...</p></div>
-      </section>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-title">Navigation</div>
 
-      <section>
-        <div class="section-title"><i class="fa-solid fa-gear"></i> Hantering</div>
-        <a href="bostader.html">Bostäder</a>
-        <a href="anvandare.html">Användare</a>
-        <a href="statistik.html">Statistik</a>
-      </section>
+    <div class="sb-group">
+      <div class="title"><i class="fa-regular fa-folder-open"></i> Sidor</div>
+      <nav id="nav-sidor" class="nav">
+        <div class="empty">Laddar...</div>
+      </nav>
+    </div>
 
-      <section>
-        <div class="section-title"><i class="fa-solid fa-envelope"></i> Meddelanden</div>
-        <a href="inkorg.html">Inkorg</a>
-        <a href="nyttobjekt.html">Lägg till objekt</a>
-      </section>
-    </aside>
+    <div class="sb-group">
+      <div class="title"><i class="fa-solid fa-gear"></i> Hantering</div>
+      <nav id="nav-hantering" class="nav">
+        <div class="empty">Laddar...</div>
+      </nav>
+    </div>
 
-    <main>
-      <h1>Välkommen till FyndBos Adminpanel</h1>
-      <p id="statusMsg" style="color:gray;"></p>
+    <div class="sb-group">
+      <div class="title"><i class="fa-solid fa-envelope"></i> Meddelanden</div>
+      <nav id="nav-medd" class="nav">
+        <div class="empty">Laddar...</div>
+      </nav>
+    </div>
+  </aside>
 
-      <div class="grid">
-        <div class="card">
-          <i class="fa-solid fa-house"></i>
-          <h3>Hantera bostäder</h3>
-          <p>Lägg till, redigera eller ta bort bostadsannonser.</p>
-        </div>
-        <div class="card">
-          <i class="fa-solid fa-users"></i>
-          <h3>Användare</h3>
-          <p>Se registrerade användare och administratörer.</p>
-        </div>
-        <div class="card">
-          <i class="fa-solid fa-chart-line"></i>
-          <h3>Statistik</h3>
-          <p>Visa webbplatsdata, sidvisningar och popularitet.</p>
-        </div>
-        <div class="card">
-          <i class="fa-solid fa-plus"></i>
-          <h3>Lägg till nytt objekt</h3>
-          <p>Publicera en ny annons direkt till bostadsflödet.</p>
-        </div>
+  <!-- MAIN -->
+  <main class="main">
+    <section class="welcome">
+      <h2 style="margin:0 0 6px; color:var(--primary)">Välkommen till FyndBos Adminpanel</h2>
+      <div id="statusMsg" style="color:#4b5563">Ansluter till databasen…</div>
+    </section>
+
+    <section class="kpis">
+      <div class="card">
+        <i class="fa-solid fa-house"></i>
+        <h3>Hantera bostäder</h3>
+        <p>Lägg till, redigera eller ta bort bostadsannonser.</p>
       </div>
+      <div class="card">
+        <i class="fa-solid fa-users"></i>
+        <h3>Användare</h3>
+        <p>Se registrerade användare och administratörer.</p>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-chart-line"></i>
+        <h3>Statistik</h3>
+        <p>Visa sidvisningar och popularitet.</p>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-plus"></i>
+        <h3>Lägg till nytt objekt</h3>
+        <p>Publicera nya annonser.</p>
+      </div>
+    </section>
 
-      <h2 style="color:var(--blue);margin-top:50px;">Lägg till ny sida</h2>
+    <section class="panel">
+      <h3 style="margin:0 0 10px; color:var(--primary)">Lägg till ny sida</h3>
       <form id="addPageForm">
-        <input type="text" id="newPageName" placeholder="Sidnamn (t.ex. Kontakt)" required>
-        <input type="text" id="newPageUrl" placeholder="URL (t.ex. kontakt.html)" required>
-        <select id="newPageCategory" required>
-          <option value="">Välj kategori...</option>
-          <option value="publik">Publik</option>
-          <option value="admin">Admin</option>
-        </select>
-        <button type="submit">Lägg till sida</button>
-        <p id="addPageMsg" class="status-msg"></p>
+        <div class="form-grid">
+          <input class="input" type="text" id="newPageName" placeholder="Sidnamn (t.ex. Kontakt)" required>
+          <input class="input" type="text" id="newPageUrl" placeholder="URL (t.ex. kontakt.html)" required>
+          <select class="select" id="newPageCategory" required>
+            <option value="">Välj kategori…</option>
+            <option value="sidor">Sidor</option>
+            <option value="hantering">Hantering</option>
+            <option value="meddelanden">Meddelanden</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Lägg till sida</button>
+        </div>
+        <div id="addPageMsg" class="msg"></div>
       </form>
-    </main>
-  </div>
-
-  <footer>&copy; 2025 FyndBo – Adminpanel</footer>
+    </section>
+  </main>
 </div>
 
-<!-- SUPABASE SCRIPT -->
+<div class="footer">© 2025 FyndBo – Adminpanel</div>
+
+<!-- === SUPABASE & APP LOGIK === -->
 <script type="module">
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
@@ -222,93 +230,120 @@ const supabase = createClient(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InltcXdvaXVodW1td3J0emZoYmdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzMDYzOTAsImV4cCI6MjA3Njg4MjM5MH0.9s0iaJm_RGJxZFyPZqQyZvPCeCz60Q6P8EsPxfSO2AI"
 );
 
-const container = document.getElementById("pageLinks");
+const navSidor = document.getElementById("nav-sidor");
+const navHan = document.getElementById("nav-hantering");
+const navMedd = document.getElementById("nav-medd");
 const statusMsg = document.getElementById("statusMsg");
 
-async function loadPages() {
-  const { data, error } = await supabase.from("pages").select("*").order("category", { ascending: true });
-  if (error) {
+// Ladda och rendera navigationen – HELT DYNAMISKT efter kategori
+async function loadPages(){
+  const { data, error } = await supabase
+    .from("pages")
+    .select("*")
+    .order("name", { ascending: true });
+
+  if(error){
     console.error(error);
-    container.innerHTML = "<p style='padding-left:40px;'>Kunde inte hämta sidor.</p>";
     statusMsg.textContent = "❌ Fel vid anslutning till databasen.";
+    [navSidor, navHan, navMedd].forEach(el => el.innerHTML = `<div class="empty">Kunde inte hämta.</div>`);
     return;
   }
 
-  if (!data || data.length === 0) {
-    container.innerHTML = "<p style='padding-left:40px;'>Inga sidor hittades.</p>";
-    return;
-  }
-
-  const publik = data.filter(p => p.category === "publik");
-  const admin = data.filter(p => p.category === "admin");
-
-  container.innerHTML = `
-    ${admin.length ? `<strong style="color:#b91c1c;padding-left:25px;">Admin Sidor</strong>${admin.map(p => `<a href="${p.url}" target="_blank">${p.name}</a>`).join('')}` : ""}
-    ${publik.length ? `<strong style="color:#0f4c81;padding-left:25px;display:block;margin-top:10px;">Publika Sidor</strong>${publik.map(p => `<a href="${p.url}" target="_blank">${p.name}</a>`).join('')}` : ""}
-  `;
   statusMsg.textContent = "✅ Sidor hämtade från databasen!";
+
+  // töm
+  navSidor.innerHTML = ""; navHan.innerHTML = ""; navMedd.innerHTML = "";
+
+  // DÖLJ adminpanel-länk i listan (blir konstigt att länka till sig själv)
+  const cleaned = (data || []).filter(p => (p.url||"").toLowerCase() !== "adminpanel.html");
+
+  // Backwards-compat: om någon post har 'publik' → behandla som 'sidor'
+  cleaned.forEach(p => { if(p.category === "publik") p.category = "sidor"; });
+
+  // Skapa item-funktion
+  const item = (p) => {
+    const icon = p.category === "hantering" ? "fa-gear"
+               : p.category === "meddelanden" ? "fa-envelope"
+               : "fa-file";
+    return `<a href="${p.url}" target="_blank" rel="noopener">
+              <i class="fa-solid ${icon}"></i><span>${p.name}</span>
+            </a>`;
+  };
+
+  // Rendera per kategori
+  const sidor = cleaned.filter(p => p.category === "sidor");
+  const han   = cleaned.filter(p => p.category === "hantering");
+  const medd  = cleaned.filter(p => p.category === "meddelanden");
+
+  navSidor.innerHTML = sidor.length ? sidor.map(item).join("") : `<div class="empty">Inga sidor ännu.</div>`;
+  navHan.innerHTML   = han.length   ? han.map(item).join("")   : `<div class="empty">Inga länkar ännu.</div>`;
+  navMedd.innerHTML  = medd.length  ? medd.map(item).join("")  : `<div class="empty">Inga länkar ännu.</div>`;
 }
 
 document.addEventListener("DOMContentLoaded", loadPages);
 
+// Form: lägg till ny sida
 const form = document.getElementById("addPageForm");
-form.addEventListener("submit", async (e) => {
+form.addEventListener("submit", async (e)=>{
   e.preventDefault();
   const name = document.getElementById("newPageName").value.trim();
   const url = document.getElementById("newPageUrl").value.trim();
   const category = document.getElementById("newPageCategory").value.trim();
   const msg = document.getElementById("addPageMsg");
 
-  if (!name || !url || !category) {
+  if(!name || !url || !category){
     msg.textContent = "⚠️ Fyll i alla fält.";
-    msg.style.color = "red";
+    msg.style.color = "#c62828";
     return;
   }
 
   const { error } = await supabase.from("pages").insert([{ name, url, category }]);
-  if (error) {
+  if(error){
     console.error(error);
     msg.textContent = "❌ Kunde inte lägga till sidan.";
-    msg.style.color = "red";
-  } else {
+    msg.style.color = "#c62828";
+  }else{
     msg.textContent = "✅ Sidan lades till!";
-    msg.style.color = "green";
+    msg.style.color = "#1b5e20";
     form.reset();
     loadPages();
   }
 });
 </script>
 
-<!-- LOGIN SCRIPT -->
+<!-- === LOGIN/LOGGA UT & LOGO-LÄNK === -->
 <script>
 const _u = atob("RnluZGJvLUFkbWlu");
 const _p = atob("RnluZEJvLTE=");
 
-function checkLogin() {
+function checkLogin(){
   const u = document.getElementById("username").value.trim();
   const p = document.getElementById("password").value.trim();
   const e = document.getElementById("errorMsg");
-  if (u === _u && p === _p) {
-    document.getElementById("loginOverlay").style.display = "none";
-    document.getElementById("adminPanel").style.display = "flex";
-    localStorage.setItem("loggedIn", "true");
-  } else {
-    e.style.display = "block";
+  if(u===_u && p===_p){
+    document.getElementById("loginOverlay").style.display="none";
+    document.getElementById("adminPanel").style.display="grid";
+    localStorage.setItem("loggedIn","true");
+  }else{
+    e.style.display="block";
   }
 }
 
-if (localStorage.getItem("loggedIn") === "true") {
-  document.getElementById("loginOverlay").style.display = "none";
-  document.getElementById("adminPanel").style.display = "flex";
+if(localStorage.getItem("loggedIn")==="true"){
+  document.getElementById("loginOverlay").style.display="none";
+  document.getElementById("adminPanel").style.display="grid";
+}else{
+  document.getElementById("loginOverlay").style.display="flex";
 }
 
-function logout() {
+function logout(){
   localStorage.removeItem("loggedIn");
-  document.getElementById("adminPanel").style.display = "none";
-  document.getElementById("loginOverlay").style.display = "flex";
+  document.getElementById("adminPanel").style.display="none";
+  document.getElementById("loginOverlay").style.display="flex";
 }
 
-document.getElementById("logoLink").addEventListener("click", () => {
+// Klick på loggan → till under-konstruktion/startsida
+document.getElementById("logoLink").addEventListener("click", ()=>{
   window.location.href = "index.html";
 });
 </script>
