@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root {
-  --blue: #0f4c81;
-  --lightblue: #e3f2fd;
-  --bg: #f4f6fa;
+  --blue: #1e5fa5;           /* Ljusare blå nyans */
+  --lightblue: #e8f2fb;
+  --bg: #f7f9fc;
   --white: #ffffff;
   --shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
@@ -44,16 +44,17 @@ body {
   background: var(--blue); color: #fff; border: none; padding: 12px 30px;
   border-radius: 8px; cursor: pointer; width: 100%; transition: 0.3s;
 }
-.login-box button:hover { background: #073a5a; }
+.login-box button:hover { background: #114b88; }
 .error { color: red; margin-top: 10px; display: none; }
 
 /* PANEL */
 #adminPanel { display: none; height: 100vh; display: flex; flex-direction: column; }
 header {
   background: var(--blue); color: #fff; display: flex; align-items: center;
-  justify-content: space-between; padding: 10px 25px; box-shadow: var(--shadow);
+  justify-content: space-between; padding: 10px 30px; box-shadow: var(--shadow);
 }
-header img { height: 70px; }
+header img { height: 120px; cursor: pointer; transition: 0.3s; }
+header img:hover { transform: scale(1.03); }
 .logout-btn {
   background: #fff; color: var(--blue); padding: 8px 18px; border-radius: 20px;
   text-decoration: none; font-weight: 600; transition: 0.3s;
@@ -62,23 +63,27 @@ header img { height: 70px; }
 
 .wrapper { display: flex; flex: 1; }
 aside {
-  width: 260px; background: #ffffff; box-shadow: 2px 0 8px rgba(0,0,0,0.05);
-  padding: 20px 0; display: flex; flex-direction: column;
+  width: 270px; background: #ffffff; box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+  padding: 25px 0; display: flex; flex-direction: column;
 }
-aside h3 { margin: 0 0 10px 25px; color: var(--blue); font-size: 1.1em; }
-aside details { margin: 10px 0; }
-aside summary {
-  font-weight: 600; padding: 10px 25px; color: var(--blue); cursor: pointer;
-  list-style: none;
+aside h3 { margin: 0 0 15px 25px; color: var(--blue); font-size: 1.2em; }
+aside section { margin-bottom: 25px; }
+aside .section-title {
+  font-weight: 600;
+  padding: 8px 25px;
+  color: var(--blue);
+  text-transform: uppercase;
+  font-size: 0.9em;
+  letter-spacing: 0.5px;
 }
 aside a {
-  display: block; padding: 8px 40px; color: #333; text-decoration: none; font-size: 0.95em;
-  transition: 0.2s;
+  display: block; padding: 8px 40px; color: #333; text-decoration: none;
+  font-size: 0.95em; transition: 0.2s;
 }
-aside a:hover { background: var(--lightblue); color: var(--blue); }
+aside a:hover { background: var(--lightblue); color: var(--blue); border-radius: 8px; }
 
-main { flex: 1; padding: 30px; overflow-y: auto; }
-main h1 { color: var(--blue); margin-bottom: 20px; font-size: 1.8em; }
+main { flex: 1; padding: 40px; overflow-y: auto; }
+main h1 { color: var(--blue); margin-bottom: 25px; font-size: 1.9em; }
 
 /* Cards */
 .grid {
@@ -111,7 +116,7 @@ footer {
   background: var(--blue); color: #fff; border: none; padding: 12px 30px;
   border-radius: 8px; cursor: pointer; transition: 0.3s;
 }
-#addPageForm button:hover { background: #073a5a; }
+#addPageForm button:hover { background: #114b88; }
 
 .status-msg {
   margin-top: 8px;
@@ -136,7 +141,7 @@ footer {
 <!-- ADMINPANEL -->
 <div id="adminPanel">
   <header>
-    <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo Logo">
+    <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo Logo" id="logoLink">
     <a href="#" class="logout-btn" onclick="logout()">Logga ut</a>
   </header>
 
@@ -144,23 +149,23 @@ footer {
     <aside>
       <h3>Navigation</h3>
 
-      <details open>
-        <summary><i class="fa-solid fa-folder-open"></i> Sidor</summary>
-        <div id="pageLinks"><p>Laddar sidor...</p></div>
-      </details>
+      <section>
+        <div class="section-title"><i class="fa-solid fa-folder-open"></i> Sidor</div>
+        <div id="pageLinks"><p style="padding-left:40px;">Laddar sidor...</p></div>
+      </section>
 
-      <details open>
-        <summary><i class="fa-solid fa-gear"></i> Hantering</summary>
+      <section>
+        <div class="section-title"><i class="fa-solid fa-gear"></i> Hantering</div>
         <a href="bostader.html">Bostäder</a>
         <a href="anvandare.html">Användare</a>
         <a href="statistik.html">Statistik</a>
-      </details>
+      </section>
 
-      <details>
-        <summary><i class="fa-solid fa-envelope"></i> Meddelanden</summary>
+      <section>
+        <div class="section-title"><i class="fa-solid fa-envelope"></i> Meddelanden</div>
         <a href="inkorg.html">Inkorg</a>
         <a href="nyttobjekt.html">Lägg till objekt</a>
-      </details>
+      </section>
     </aside>
 
     <main>
@@ -224,33 +229,23 @@ async function loadPages() {
   const { data, error } = await supabase.from("pages").select("*").order("category", { ascending: true });
   if (error) {
     console.error(error);
-    container.innerHTML = "<p>Kunde inte hämta sidor.</p>";
+    container.innerHTML = "<p style='padding-left:40px;'>Kunde inte hämta sidor.</p>";
     statusMsg.textContent = "❌ Fel vid anslutning till databasen.";
     return;
   }
 
-  if (data.length === 0) {
-    container.innerHTML = "<p>Inga sidor hittades.</p>";
+  if (!data || data.length === 0) {
+    container.innerHTML = "<p style='padding-left:40px;'>Inga sidor hittades.</p>";
     return;
   }
 
-  const grouped = data.reduce((acc, p) => {
-    if (!acc[p.category]) acc[p.category] = [];
-    acc[p.category].push(p);
-    return acc;
-  }, {});
+  const publik = data.filter(p => p.category === "publik");
+  const admin = data.filter(p => p.category === "admin");
 
-  container.innerHTML = Object.entries(grouped)
-    .map(([cat, pages]) => `
-      <div style="margin-bottom:15px;">
-        <strong style="color:${cat === 'admin' ? '#b91c1c' : '#0f4c81'};text-transform:capitalize;">
-          ${cat} sidor
-        </strong>
-        <div>${pages.map(p => `<a href="${p.url}" target="_blank">${p.name}</a>`).join('')}</div>
-      </div>
-    `)
-    .join("");
-
+  container.innerHTML = `
+    ${admin.length ? `<strong style="color:#b91c1c;padding-left:25px;">Admin Sidor</strong>${admin.map(p => `<a href="${p.url}" target="_blank">${p.name}</a>`).join('')}` : ""}
+    ${publik.length ? `<strong style="color:#0f4c81;padding-left:25px;display:block;margin-top:10px;">Publika Sidor</strong>${publik.map(p => `<a href="${p.url}" target="_blank">${p.name}</a>`).join('')}` : ""}
+  `;
   statusMsg.textContent = "✅ Sidor hämtade från databasen!";
 }
 
@@ -312,6 +307,10 @@ function logout() {
   document.getElementById("adminPanel").style.display = "none";
   document.getElementById("loginOverlay").style.display = "flex";
 }
+
+document.getElementById("logoLink").addEventListener("click", () => {
+  window.location.href = "index.html";
+});
 </script>
 
 </body>
