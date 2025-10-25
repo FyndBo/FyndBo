@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FyndBo | Sök bostäder</title>
+<title>FyndBo | Hitta ditt drömhem</title>
 <link rel="icon" href="images/FyndBo-blue-removebg-preview.png">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -14,146 +14,142 @@ body {
   background: #f5f8fb;
   margin: 0;
   color: #1e293b;
+  overflow-x: hidden;
 }
 
 /* HEADER */
 header {
   position: fixed;
-  top: 0; left: 0; width: 100%;
-  background: rgba(15, 76, 129, 0.9);
+  top: 0; left: 0;
+  width: 100%;
+  background: rgba(15, 76, 129, 0.95);
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  color: white;
   height: 70px;
-  display: flex; align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 50;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
-header a { color: white; transition: opacity 0.2s ease; }
-header a:hover { opacity: 0.85; }
+.header-content {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header img {
+  height: 48px;
+}
+nav a {
+  margin: 0 18px;
+  color: white;
+  font-weight: 500;
+  transition: opacity 0.3s;
+}
+nav a:hover { opacity: 0.8; }
+
+.logout-btn {
+  background: white;
+  color: #0f4c81;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+.logout-btn:hover {
+  background: #e2e8f0;
+}
 
 /* MAIN SECTION */
-.main-section {
-  margin-top: 100px;
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 120px;
+  padding: 0 40px;
   max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
-  display: flex;
-  gap: 30px;
-  padding: 0 30px;
 }
-.search-area {
+
+/* SEARCH BOX */
+.search-box {
   flex: 1;
   background: white;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  padding: 40px 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  padding: 35px 40px;
 }
-.map-area {
-  flex: 1.3;
-  background: #e2e8f0;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  position: relative;
+.search-box h2 {
+  font-size: 1.8rem;
+  color: #0f4c81;
+  font-weight: 700;
+  margin-bottom: 25px;
 }
-.map-area img {
+.search-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+input, select {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.9;
+  padding: 12px 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.2s;
+  background: #f9fafb;
 }
-
-/* SEARCH INPUT */
-.search-box {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #f8fafc;
-  border: 2px solid #cbd5e1;
-  border-radius: 50px;
-  padding: 12px 20px;
-  transition: box-shadow 0.3s ease;
-}
-.search-box:focus-within {
-  box-shadow: 0 0 0 4px rgba(15, 76, 129, 0.25);
-}
-.search-box input {
-  border: none;
+input:focus, select:focus {
   outline: none;
-  flex: 1;
-  background: transparent;
-  font-size: 1.1rem;
-  color: #1e293b;
+  border-color: #0f4c81;
+  box-shadow: 0 0 0 3px rgba(15,76,129,0.15);
 }
-.search-box i {
-  color: #0f4c81;
-  font-size: 1.3rem;
-}
-
-/* FILTER BUTTONS */
-.filter-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.search-btn {
   margin-top: 25px;
-}
-.filter-buttons button {
-  background: #f1f5f9;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 30px;
-  font-weight: 500;
-  color: #0f4c81;
-  transition: all 0.3s ease;
-}
-.filter-buttons button:hover,
-.filter-buttons button.active {
   background: #0f4c81;
   color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 14px;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  transition: background 0.3s, transform 0.2s;
+}
+.search-btn:hover {
+  background: #073a5a;
+  transform: translateY(-2px);
 }
 
-/* RESULTS */
-.results {
-  margin-top: 40px;
-}
-.property-card {
-  background: #fff;
-  border-radius: 15px;
+/* MAP */
+.map-container {
+  flex: 1;
+  background: #e2e8f0;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  transition: transform 0.3s ease;
-  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.property-card:hover {
-  transform: translateY(-4px);
-}
-.property-card img {
+.map-container img {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-.property-card .info {
-  padding: 15px;
-}
-.property-card .info h3 {
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: #0f4c81;
-}
-.property-card .info p {
-  color: #475569;
-  font-size: 0.95rem;
+  height: auto;
+  opacity: 0.95;
 }
 
 /* FOOTER */
 footer {
-  margin-top: 100px;
-  background: #0f4c81;
-  color: white;
   text-align: center;
-  padding: 25px 0;
+  color: #64748b;
+  padding: 40px 0;
+  font-size: 0.9rem;
+  margin-top: 100px;
 }
 </style>
 </head>
@@ -162,65 +158,53 @@ footer {
 
 <!-- HEADER -->
 <header>
-  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between w-full">
-    <div class="flex items-center gap-3 cursor-pointer" onclick="location.href='startsida.html'">
-      <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo" class="h-12 md:h-14 drop-shadow-lg">
-    </div>
-    <nav class="hidden md:flex items-center gap-10 text-lg font-semibold">
-      <a href="startsida.html">Hem</a>
+  <div class="header-content">
+    <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo logo">
+    <nav>
+      <a href="#">Hem</a>
       <a href="fyndbo.se-läs_mer.html">Om oss</a>
       <a href="#">Kontakt</a>
     </nav>
-    <a href="login.html" class="px-5 py-2 rounded-full bg-white text-[#0f4c81] font-semibold hover:bg-blue-100 transition">Logga in</a>
+    <a href="logout.html" class="logout-btn">Logga ut</a>
   </div>
 </header>
 
 <!-- MAIN CONTENT -->
-<section class="main-section">
+<div class="main-container">
 
-  <!-- VÄNSTRA SIDAN -->
-  <div class="search-area">
-    <h1 class="text-3xl font-extrabold text-[#0f4c81] mb-6">Hitta ditt drömhem</h1>
-
-    <div class="search-box">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="text" placeholder="Sök efter stad, område eller fastighetstyp..." />
+  <!-- LEFT SEARCH BOX -->
+  <div class="search-box">
+    <h2>Sök bostäder</h2>
+    <input type="text" placeholder="Plats / Område">
+    <div class="search-grid">
+      <input type="text" placeholder="Min pris (Mkr)">
+      <input type="text" placeholder="Max pris (Mkr)">
+      <select>
+        <option selected disabled>Typ av bostad</option>
+        <option>Villa</option>
+        <option>Lägenhet</option>
+        <option>Radhus</option>
+        <option>Gård</option>
+        <option>Skog / Mark</option>
+        <option>Kommersiell</option>
+      </select>
+      <select>
+        <option selected disabled>Antal rum</option>
+        <option>1+</option>
+        <option>2+</option>
+        <option>3+</option>
+        <option>4+</option>
+        <option>5+</option>
+      </select>
     </div>
-
-    <div class="filter-buttons">
-      <button class="active">Alla</button>
-      <button>Hus</button>
-      <button>Lägenhet</button>
-      <button>Radhus</button>
-      <button>Gård</button>
-      <button>Skog</button>
-      <button>Kommersiell</button>
-    </div>
-
-    <div class="results grid grid-cols-2 gap-4 mt-8">
-      <div class="property-card">
-        <img src="images/house1.jpg" alt="Villa i Stockholm">
-        <div class="info">
-          <h3>Villa i Stockholm</h3>
-          <p>6 rum • 190 m² • 7.2 Mkr</p>
-        </div>
-      </div>
-      <div class="property-card">
-        <img src="images/apartment1.jpg" alt="Lägenhet i Göteborg">
-        <div class="info">
-          <h3>Lägenhet i Göteborg</h3>
-          <p>3 rum • 80 m² • 3.4 Mkr</p>
-        </div>
-      </div>
-    </div>
+    <button class="search-btn">Sök bostäder</button>
   </div>
 
-  <!-- HÖGRA SIDAN -->
-  <div class="map-area">
+  <!-- RIGHT MAP -->
+  <div class="map-container">
     <img src="images/sweden-map.png" alt="Karta över Sverige">
   </div>
-
-</section>
+</div>
 
 <!-- FOOTER -->
 <footer>
