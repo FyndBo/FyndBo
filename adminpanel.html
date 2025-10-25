@@ -135,22 +135,26 @@ footer {
   <div class="wrapper">
     <aside>
       <h3>Navigation</h3>
+
+      <!-- Publika sidor -->
       <details open>
         <summary><i class="fa-solid fa-folder-open"></i> Sidor</summary>
-        <div id="pageLinks"><p>Laddar sidor...</p></div>
+        <div id="pageLinks"><p>Laddar publika sidor...</p></div>
       </details>
 
-      <details>
+      <!-- Admin-hantering -->
+      <details open>
         <summary><i class="fa-solid fa-gear"></i> Hantering</summary>
-        <a href="#">Bostäder</a>
-        <a href="#">Användare</a>
-        <a href="#">Statistik</a>
+        <a href="bostader.html">Bostäder</a>
+        <a href="anvandare.html">Användare</a>
+        <a href="statistik.html">Statistik</a>
       </details>
 
+      <!-- Meddelanden -->
       <details>
         <summary><i class="fa-solid fa-envelope"></i> Meddelanden</summary>
-        <a href="#">Inkorg</a>
-        <a href="#">Nytt meddelande</a>
+        <a href="inkorg.html">Inkorg</a>
+        <a href="nyttobjekt.html">Lägg till objekt</a>
       </details>
     </aside>
 
@@ -207,16 +211,24 @@ const container = document.getElementById("pageLinks");
 const statusMsg = document.getElementById("statusMsg");
 
 async function loadPages() {
-  const { data, error } = await supabase.from("pages").select("*");
+  const { data, error } = await supabase
+    .from("pages")
+    .select("*")
+    .eq("category", "publik"); // ✅ endast publika sidor
+
   if (error) {
     console.error(error);
     container.innerHTML = "<p>Kunde inte hämta sidor.</p>";
     statusMsg.textContent = "❌ Fel vid anslutning till databasen.";
   } else {
-    container.innerHTML = data.map(p =>
-      `<a href="${p.url}" target="_blank">${p.name}</a>`
-    ).join("");
-    statusMsg.textContent = "✅ Sidor hämtade från databasen!";
+    if (data.length === 0) {
+      container.innerHTML = "<p>Inga publika sidor hittades.</p>";
+    } else {
+      container.innerHTML = data
+        .map((p) => `<a href="${p.url}" target="_blank">${p.name}</a>`)
+        .join("");
+    }
+    statusMsg.textContent = "✅ Publika sidor hämtade från databasen!";
   }
 }
 
@@ -233,7 +245,8 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
-  const { error } = await supabase.from("pages").insert([{ name, url }]);
+  // När du lägger till en ny sida, sätt category till "publik" som standard
+  const { error } = await supabase.from("pages").insert([{ name, url, category: "publik" }]);
   if (error) {
     console.error(error);
     msg.textContent = "❌ Kunde inte lägga till sidan.";
@@ -249,7 +262,7 @@ form.addEventListener("submit", async (e) => {
 document.addEventListener("DOMContentLoaded", loadPages);
 </script>
 
-<!-- LOGIN -->
+<!-- LOGIN SCRIPT -->
 <script>
 const _u = atob("RnluZGJvLUFkbWlu");
 const _p = atob("RnluZEJvLTE=");
