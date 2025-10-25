@@ -1,149 +1,199 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FyndBo – Mer om företaget</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary:#0f4c81;
-      --accent:#073a5a;
-      --bg1:#f4f7fb;
-      --bg2:#dfe9f3;
-      --panel:#ffffffcc;
-      --stroke:#e6eef7;
-      --shadow:0 6px 18px rgba(0,0,0,.08);
-    }
-    html { color-scheme: light; }
-    body {
-      margin:0;
-      font-family:'Poppins',sans-serif;
-      background:linear-gradient(135deg,var(--bg1),var(--bg2));
-      color:#1f2937;
-      padding:30px 15px;
-      line-height:1.6;
-      display:flex;
-      justify-content:center;
-    }
-    .container {
-      background:var(--panel);
-      backdrop-filter:blur(10px);
-      border-radius:18px;
-      box-shadow:var(--shadow);
-      max-width:900px;
-      width:100%;
-      padding:40px 35px;
-    }
-    h1, h2, h3 {
-      font-family:'Montserrat',sans-serif;
-      color:var(--primary);
-      margin-bottom:15px;
-    }
-    h1 { font-size:2.8rem; }
-    h2 { font-size:2.1rem; margin-top:40px; }
-    h3 { font-size:1.7rem; margin-top:30px; }
-    p, li {
-      font-size:1.15em;
-      margin-bottom:20px;
-      color:#374151;
-    }
-    .feature-item {
-      margin-bottom:15px;
-      font-size:1.15em;
-    }
-    .feature-item::before {
-      content:"✔";
-      margin-right:10px;
-      color:var(--primary);
-    }
-    .quote {
-      font-style:italic;
-      background:rgba(15,76,129,0.1);
-      border-left:5px solid var(--primary);
-      padding:15px 20px;
-      margin:20px 0;
-      color:#334155;
-    }
-    .img-section {
-      text-align:center;
-      margin:30px 0;
-    }
-    .img-section img {
-      max-width:100%;
-      border-radius:10px;
-      box-shadow:0 5px 15px rgba(0,0,0,.1);
-    }
-    a.back-button {
-      display:inline-block;
-      margin-top:40px;
-      padding:15px 30px;
-      background-color:var(--primary);
-      color:#fff;
-      text-decoration:none;
-      border-radius:8px;
-      transition:background-color 0.3s, transform 0.3s;
-    }
-    a.back-button:hover {
-      background-color:var(--accent);
-      transform:translateY(-2px);
-    }
-    @media(max-width:600px){
-      h1{font-size:2.1rem;}
-      h2{font-size:1.7rem;}
-      .container{padding:30px 20px;}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FyndBo – Om oss</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --primary:#0f4c81;
+  --accent:#073a5a;
+  --bg1:#f4f7fb;
+  --bg2:#dfe9f3;
+  --panel:rgba(255,255,255,0.75);
+}
+
+html { color-scheme: light; }
+body {
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:#1f2937;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  padding:40px 20px;
+}
+
+/* --- Container --- */
+.container {
+  background:var(--panel);
+  backdrop-filter:blur(10px);
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+  max-width:900px;
+  width:100%;
+  padding:50px 40px;
+  animation:fadeIn 0.8s ease-out;
+}
+@keyframes fadeIn {from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+
+/* --- Header --- */
+.header {
+  text-align:center;
+  margin-bottom:40px;
+}
+.header img {
+  width:200px;
+  margin-bottom:10px;
+  user-select:none;
+}
+.header h1 {
+  font-family:'Montserrat',sans-serif;
+  font-size:2.6rem;
+  color:var(--primary);
+  margin:0;
+}
+.header p {
+  font-size:1.1rem;
+  color:#374151;
+  margin-top:10px;
+}
+
+/* --- Sections --- */
+h2 {
+  font-family:'Montserrat',sans-serif;
+  color:var(--primary);
+  margin-top:40px;
+  font-size:1.8rem;
+}
+h3 {
+  font-family:'Montserrat',sans-serif;
+  color:var(--primary);
+  margin-top:30px;
+  font-size:1.4rem;
+}
+p, li {
+  font-size:1.1rem;
+  line-height:1.7;
+  color:#374151;
+}
+ul {
+  list-style:none;
+  padding:0;
+}
+.feature-item::before {
+  content:"✔";
+  color:var(--primary);
+  margin-right:10px;
+}
+
+/* --- Quote --- */
+.quote {
+  background:rgba(15,76,129,0.1);
+  border-left:5px solid var(--primary);
+  padding:15px 20px;
+  font-style:italic;
+  margin:25px 0;
+  color:#334155;
+}
+
+/* --- Image section --- */
+.img-section {
+  text-align:center;
+  margin:30px 0;
+}
+.img-section img {
+  max-width:80%;
+  border-radius:12px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* --- CTA --- */
+.cta {
+  text-align:center;
+  margin-top:50px;
+}
+.cta a {
+  display:inline-block;
+  padding:14px 35px;
+  background:var(--primary);
+  color:#fff;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:600;
+  transition:all 0.25s ease;
+}
+.cta a:hover {
+  background:var(--accent);
+  transform:translateY(-2px);
+}
+
+/* --- Responsive --- */
+@media(max-width:600px){
+  .container{padding:30px 20px;}
+  .header img{width:150px;}
+  .header h1{font-size:2.1rem;}
+}
+</style>
 </head>
+
 <body>
-
 <div class="container">
-  <h1>Om FyndBo</h1>
-  <p>FyndBo är en modern bostadsportal som grundades med visionen att göra bostadsletande enklare och mer intuitivt. Idén föddes redan i högstadiet hos grundaren.</p>
-
-  <div class="quote">
-    "Vår vision är att hjälpa människor att hitta sitt drömhem på ett smartare och mer inspirerande sätt."
+  <div class="header">
+    <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo logotyp">
+    <h1>Om FyndBo</h1>
+    <p>Din digitala bostadsportal för framtidens boendeupplevelse.</p>
   </div>
 
-  <h2>Företagets historia</h2>
-  <p>År 2024 började grundaren utveckla konceptet för FyndBo, med fokus på AI-baserade rekommendationer och smarta filter.</p>
+  <p>FyndBo skapades med ambitionen att förena teknik, design och användarvänlighet i bostadsmarknaden.  
+  Vår plattform ska inte bara hjälpa dig att hitta en bostad — den ska hjälpa dig att hitta ett hem.</p>
+
+  <div class="quote">"Vi vill skapa en plats där bostadsletande blir inspirerande, tryggt och personligt."</div>
+
+  <h2>Vår historia</h2>
+  <p>Idén till FyndBo föddes 2024 ur en passion för innovation och ett behov av att göra bostadsletande enklare.  
+  Vi såg en möjlighet att använda artificiell intelligens och smart design för att revolutionera sättet människor hittar bostäder på.</p>
 
   <ul>
-    <li class="feature-item">Smarta filter och kategorier</li>
+    <li class="feature-item">Smarta filter och AI-rekommendationer</li>
     <li class="feature-item">Detaljerad information om bostäder och områden</li>
-    <li class="feature-item">AI-rekommendationer för drömhem</li>
-    <li class="feature-item">Interaktiv design som sparar tid</li>
+    <li class="feature-item">Modern, responsiv design</li>
+    <li class="feature-item">Data och insikter i realtid</li>
   </ul>
 
   <div class="img-section">
-    <img src="images/FyndBo-blue-removebg-preview.png" alt="FyndBo Logo">
+    <img src="images/Unsplash-img-cityoverpicture.jpg" alt="FyndBo bakgrundsbild">
   </div>
 
-  <h2>Vision och mål</h2>
-  <p>FyndBo vill revolutionera bostadsmarknaden genom moderna teknologier. Målet är att varje användare ska känna att portalen förstår deras behov.</p>
+  <h2>Vår vision</h2>
+  <p>FyndBo ska bli Sveriges mest pålitliga och användarvänliga bostadsportal.  
+  Vi strävar efter att ge dig relevanta rekommendationer, insikter om marknaden och verktyg som gör processen roligare.</p>
 
   <h3>Våra värderingar</h3>
   <ul>
-    <li class="feature-item">Innovation</li>
-    <li class="feature-item">Användarvänlighet</li>
-    <li class="feature-item">Transparens</li>
-    <li class="feature-item">Kvalitet</li>
+    <li class="feature-item">🔹 Innovation – vi tänker nytt, alltid.</li>
+    <li class="feature-item">🔹 Enkelhet – vi gör komplexa saker lätta.</li>
+    <li class="feature-item">🔹 Kvalitet – varje detalj räknas.</li>
+    <li class="feature-item">🔹 Trygghet – din upplevelse i fokus.</li>
   </ul>
+
+  <div class="quote">"Vi kombinerar innovation med enkelhet för att skapa något som verkligen betyder något – ett bättre sätt att hitta hem."</div>
 
   <h2>Framtida funktioner</h2>
   <ul>
-    <li class="feature-item">Interaktiva kartor</li>
-    <li class="feature-item">Notifieringar för nya objekt</li>
-    <li class="feature-item">Integration med sociala medier</li>
-    <li class="feature-item">Detaljerade analyser av bostadsmarknaden</li>
+    <li class="feature-item">Interaktiva kartor över bostadsområden</li>
+    <li class="feature-item">Notifieringar vid nya objekt</li>
+    <li class="feature-item">Personliga AI-rekommendationer</li>
+    <li class="feature-item">Statistik och analyser i realtid</li>
   </ul>
 
-  <div class="quote">
-    "Vi vill skapa en plattform där bostadsletande blir roligt, smart och enkelt."
+  <div class="cta">
+    <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Tillbaka till startsidan</a>
   </div>
-
-  <a href="index.html" class="back-button">Tillbaka till startsidan</a>
 </div>
-
 </body>
 </html>
